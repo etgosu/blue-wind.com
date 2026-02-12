@@ -1,5 +1,602 @@
-<thml>
-  <body>
-    안녕하세요. 블루윈드 입니다.
-  </body>
-</thml>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="날씨와 내 옷장 데이터를 기반으로 AI가 오늘의 코디를 추천해주는 옷장 앱을 만드는 팀." />
+  <title>Blue Wind — AI 옷장 & 날씨 코디 추천</title>
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#111a33;
+      --panel2:#0f1730;
+      --text:#e9eeff;
+      --muted:#a8b3d6;
+      --line:rgba(255,255,255,.12);
+      --brand:#7c5cff;
+      --brand2:#2dd4ff;
+      --ok:#33d17a;
+      --warn:#ffcc66;
+      --shadow: 0 16px 40px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 24px;
+      --max: 1080px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(800px 400px at 15% 10%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(700px 420px at 85% 15%, rgba(45,212,255,.25), transparent 55%),
+        radial-gradient(900px 520px at 50% 105%, rgba(51,209,122,.18), transparent 50%),
+        var(--bg);
+      line-height:1.6;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
+    .nav{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter:saturate(1.4) blur(10px);
+      background: linear-gradient(to bottom, rgba(11,16,32,.85), rgba(11,16,32,.55));
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; text-decoration:none;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 10px 24px rgba(124,92,255,.25);
+      position:relative;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:9px;
+      border-radius:10px;
+      background: rgba(255,255,255,.22);
+      transform: rotate(15deg);
+    }
+    .nav-links{
+      display:flex; gap:14px; align-items:center;
+      color:var(--muted);
+      font-weight:600;
+    }
+    .nav-links a{
+      text-decoration:none;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+    .nav-links a:hover{
+      color:var(--text);
+      border-color: var(--line);
+      background: rgba(255,255,255,.04);
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      font-weight:800;
+      text-decoration:none;
+      gap:10px;
+      cursor:pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18);}
+    .btn:active{transform: translateY(1px);}
+    .btn.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 18px 40px rgba(124,92,255,.25);
+    }
+    .btn.primary:hover{filter: brightness(1.04);}
+    .hero{
+      padding:46px 0 26px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-card{padding:26px;}
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:7px 12px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-weight:700;
+      font-size:13px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: var(--ok);
+      box-shadow: 0 0 0 4px rgba(51,209,122,.12);
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height:1.15;
+      letter-spacing:-.5px;
+    }
+    .lead{
+      margin:0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 62ch;
+    }
+    .cta{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .mini{
+      padding:20px;
+      background: linear-gradient(180deg, rgba(17,26,51,.7), rgba(15,23,48,.65));
+      border-top:1px solid var(--line);
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .pill{
+      padding:12px 12px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .pill b{display:block; margin-bottom:4px;}
+    .pill span{color:var(--muted); font-size:13px;}
+    .side{
+      padding:22px;
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .side .metric{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding:16px;
+      background: rgba(255,255,255,.03);
+    }
+    .metric .label{color:var(--muted); font-weight:700; font-size:13px;}
+    .metric .value{font-size:22px; font-weight:900; margin-top:6px;}
+    .metric .desc{color:var(--muted); font-size:13px; margin-top:6px;}
+    section{padding:18px 0;}
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px;
+      margin:16px 0 12px;
+    }
+    h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing:-.2px;
+    }
+    .hint{margin:0; color:var(--muted); font-size:13px;}
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .feature{
+      padding:16px;
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .feature .tag{
+      display:inline-flex;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .feature h3{margin:10px 0 6px; font-size:16px;}
+    .feature p{margin:0; color:var(--muted); font-size:13px;}
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .list{
+      margin:0; padding-left:18px; color:var(--muted); font-size:13px;
+    }
+    .list li{margin:6px 0;}
+    .timeline .step{
+      padding:16px;
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      margin-bottom:10px;
+    }
+    .badge{
+      display:inline-flex;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-size:12px;
+      font-weight:900;
+      color: var(--text);
+    }
+    .step p{margin:8px 0 0; color:var(--muted); font-size:13px;}
+    footer{
+      padding:26px 0 46px;
+      border-top:1px solid var(--line);
+      margin-top:16px;
+      color: var(--muted);
+      font-size:13px;
+    }
+    .footer-row{
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      align-items:center;
+    }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      padding:4px 7px; border-radius:8px; border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      font-size: 12px;
+    }
+    .modal{
+      position:fixed; inset:0; display:none;
+      background: rgba(0,0,0,.5);
+      align-items:center; justify-content:center;
+      padding:18px;
+    }
+    .modal.open{display:flex;}
+    .modal-card{
+      width:min(720px, 100%);
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(17,26,51,.95), rgba(15,23,48,.92));
+      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      overflow:hidden;
+    }
+    .modal-head{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:16px 16px;
+      border-bottom:1px solid var(--line);
+    }
+    .modal-head h3{margin:0; font-size:16px;}
+    .modal-body{padding:16px;}
+    .code{
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding:12px;
+      background: rgba(0,0,0,.25);
+      overflow:auto;
+      color: #dfe7ff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+      .mini{grid-template-columns:1fr}
+      .grid3{grid-template-columns:1fr}
+      .split{grid-template-columns:1fr}
+      .nav-links{display:none;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <a class="brand" href="#top">
+          <span class="logo" aria-hidden="true"></span>
+          <span>Blue Wind</span>
+        </a>
+
+        <div class="nav-links" aria-label="빠른 이동">
+          <a href="#product">제품</a>
+          <a href="#tech">기술</a>
+          <a href="#roadmap">로드맵</a>
+          <a href="#trust">보안·프라이버시</a>
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+          <a class="btn" href="#contact">문의</a>
+          <button class="btn primary" id="btn-demo" type="button">데모 보기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <div class="wrap">
+      <div class="hero">
+        <div class="hero-grid">
+          <div class="card">
+            <div class="hero-card">
+              <div class="kicker"><span class="dot"></span> 정적 웹 · MVP 공개 중</div>
+              <h1>내 옷장 + 오늘 날씨로<br/>AI가 “지금 입기 좋은 코디”를 추천합니다.</h1>
+              <p class="lead">
+                Blue Wind는 <b>옷장 관리</b>와 <b>날씨 기반 코디 추천</b>을 한 번에 해결하는 앱을 만들고 있어요.
+                사용자가 등록한 옷(소재·두께·색상 등)과 날씨를 바탕으로, AI가 맥락 있는 코디를 제안하고
+                필요하면 이미지 합성/생성으로 “착장 느낌”까지 빠르게 확인할 수 있게 합니다.
+              </p>
+
+              <div class="cta">
+                <button class="btn primary" id="btn-demo2" type="button">데모/기능 개요</button>
+                <a class="btn" href="#product">제품 살펴보기</a>
+                <a class="btn" href="#tech">기술 스택</a>
+              </div>
+            </div>
+
+            <div class="mini">
+              <div class="pill">
+                <b>핵심 가치</b>
+                <span>“내 옷을 기준으로” 오늘의 선택을 쉽게</span>
+              </div>
+              <div class="pill">
+                <b>타깃</b>
+                <span>옷이 많은데 매일 뭐 입을지 고민하는 사용자</span>
+              </div>
+              <div class="pill">
+                <b>차별점</b>
+                <span>날씨+옷장+AI 추천+시각화(이미지)</span>
+              </div>
+              <div class="pill">
+                <b>원칙</b>
+                <span>개인정보 최소 수집 · 안전한 저장</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="card side" aria-label="요약 카드">
+            <div class="metric">
+              <div class="label">제품 방향</div>
+              <div class="value">옷장 앱 + AI 코디</div>
+              <div class="desc">단순 추천이 아니라 “내 옷” 기준으로 현실적인 조합을 제안합니다.</div>
+            </div>
+            <div class="metric">
+              <div class="label">운영 방식</div>
+              <div class="value">서버리스 중심</div>
+              <div class="desc">Flutter + Supabase + Edge Functions로 빠르게 반복 개선합니다.</div>
+            </div>
+            <div class="metric">
+              <div class="label">우선순위</div>
+              <div class="value">비용 최적화</div>
+              <div class="desc">이미지 생성/합성 비용을 낮추는 구조를 꾸준히 개선합니다.</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <section id="product">
+        <div class="section-title">
+          <h2>제품: 옷장 기반 코디 추천</h2>
+          <p class="hint">MVP에 가까운 핵심 기능부터 단단하게 만들고 있어요.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="feature">
+            <span class="tag">WEATHER</span>
+            <h3>날씨 기반 추천</h3>
+            <p>기온·강수·체감 요소를 반영해 오늘 “현실적으로 입을 수 있는” 코디를 제안합니다.</p>
+          </div>
+          <div class="feature">
+            <span class="tag">WARDROBE</span>
+            <h3>내 옷장 관리</h3>
+            <p>상의/하의/신발을 등록하고 소재·두께·색상·통기성 같은 특성을 기반으로 추천 정확도를 올립니다.</p>
+          </div>
+          <div class="feature">
+            <span class="tag">AI</span>
+            <h3>개인화 코디</h3>
+            <p>사용자 취향을 반영해 스타일 힌트·상황(출근/주말/데이트)까지 고려한 조합을 제공합니다.</p>
+          </div>
+          <div class="feature">
+            <span class="tag">IMAGE</span>
+            <h3>시각화(이미지)</h3>
+            <p>코디를 입었을 때의 느낌을 빠르게 이해할 수 있도록 이미지 합성/생성 옵션을 준비합니다.</p>
+          </div>
+          <div class="feature">
+            <span class="tag">COST</span>
+            <h3>비용 최적화</h3>
+            <p>API 사용량/모델 선택/캐시 설계로 이미지 생성 비용과 지연을 줄이는 전략을 적용합니다.</p>
+          </div>
+          <div class="feature">
+            <span class="tag">UX</span>
+            <h3>반응형 UX</h3>
+            <p>모바일 중심으로 빠르고 단순한 흐름: “옷 선택 → 추천 → 저장/공유”까지 자연스럽게.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="tech">
+        <div class="section-title">
+          <h2>기술 스택</h2>
+          <p class="hint">빠른 배포와 안전한 데이터 처리를 우선합니다.</p>
+        </div>
+
+        <div class="split">
+          <div class="feature">
+            <span class="tag">CLIENT</span>
+            <h3>Flutter</h3>
+            <ul class="list">
+              <li>모바일 앱 중심의 일관된 UX</li>
+              <li>API 호출/캐시/상태관리로 반응성 확보</li>
+            </ul>
+          </div>
+
+          <div class="feature">
+            <span class="tag">BACKEND</span>
+            <h3>Supabase + Edge Functions</h3>
+            <ul class="list">
+              <li>DB + Auth + Storage + Edge Functions로 서버리스 운영</li>
+              <li>정책(RLS)과 토큰 기반 인증으로 접근 제어</li>
+            </ul>
+          </div>
+
+          <div class="feature">
+            <span class="tag">AI</span>
+            <h3>LLM / 이미지 모델</h3>
+            <ul class="list">
+              <li>텍스트 기반 추천(코디/요약/퀴즈 등)</li>
+              <li>이미지 생성/합성 기능은 비용·품질 균형을 최적화</li>
+            </ul>
+          </div>
+
+          <div class="feature">
+            <span class="tag">OPS</span>
+            <h3>운영</h3>
+            <ul class="list">
+              <li>GitHub 기반 배포/버전 관리</li>
+              <li>관찰 가능성: 호출량/에러/지연 모니터링</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="hint" style="margin-top:10px;">
+          * 이 페이지는 GitHub Pages(정적)로 운영 중이며, 앱/백엔드는 별도로 구성됩니다.
+        </p>
+      </section>
+
+      <section id="roadmap" class="timeline">
+        <div class="section-title">
+          <h2>로드맵</h2>
+          <p class="hint">가볍게 시작해서, 유저 피드백으로 빠르게 개선합니다.</p>
+        </div>
+
+        <div class="step">
+          <span class="badge">Phase 1 · MVP</span>
+          <p>옷장 등록 → 날씨 기반 추천 → 추천 저장/히스토리 → 기본 UI/UX 안정화</p>
+        </div>
+        <div class="step">
+          <span class="badge">Phase 2 · 개인화</span>
+          <p>취향/상황 반영, 코디 조합 다양화, 필터/정렬 고도화, 추천 설명(왜 이 조합인지) 강화</p>
+        </div>
+        <div class="step">
+          <span class="badge">Phase 3 · 시각화</span>
+          <p>이미지 합성/생성 기능을 “옵션”으로 제공하고, 비용 최적화(캐시/모델/빈도 제어) 적용</p>
+        </div>
+      </section>
+
+      <section id="trust">
+        <div class="section-title">
+          <h2>보안·프라이버시</h2>
+          <p class="hint">개인 데이터는 최소 수집 + 안전한 저장을 기본으로 합니다.</p>
+        </div>
+
+        <div class="split">
+          <div class="feature">
+            <span class="tag">PRIVACY</span>
+            <h3>최소 수집 원칙</h3>
+            <ul class="list">
+              <li>추천 품질에 필요한 데이터만 수집</li>
+              <li>민감정보는 기본적으로 수집하지 않음</li>
+            </ul>
+          </div>
+          <div class="feature">
+            <span class="tag">SECURITY</span>
+            <h3>안전한 접근 제어</h3>
+            <ul class="list">
+              <li>토큰 기반 인증 + RLS 정책으로 사용자별 데이터 분리</li>
+              <li>비밀키/관리자 키는 클라이언트에 포함하지 않음</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-title">
+          <h2>문의</h2>
+          <p class="hint">아직 도메인 없이 무료로 운영 중입니다. 필요하면 연락 채널을 연결해요.</p>
+        </div>
+
+        <div class="feature">
+          <p style="margin:0; color:var(--muted); font-size:13px;">
+            아래 버튼은 현재 데모(가이드) 모달을 띄웁니다. 실제 이메일/폼을 연결하려면
+            <span class="kbd">mailto:</span> 또는 폼 서비스(예: Formspree/Google Form 등)로 연결하면 돼요.
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+            <button class="btn primary" id="btn-demo3" type="button">데모 안내 다시보기</button>
+            <a class="btn" href="mailto:hello@blue-wind.example?subject=Blue%20Wind%20문의">메일로 문의(예시)</a>
+            <a class="btn" href="#top">위로</a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="footer-row">
+          <div>© <span id="year"></span> Blue Wind. All rights reserved.</div>
+          <div>
+            <span class="kbd">GitHub Pages</span>
+            <span style="opacity:.6;"> · </span>
+            <span class="kbd">Static HTML</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Demo modal -->
+  <div class="modal" id="modal">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-head">
+        <h3 id="modal-title">데모/기능 개요</h3>
+        <button class="btn" id="btn-close" type="button">닫기</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin:0 0 10px; color:var(--muted); font-size:13px;">
+          이 페이지는 “회사 소개 + 앱 소개” 용도로 구성된 정적 페이지입니다.
+          아래 체크리스트를 채우면 실제 서비스 소개 페이지로 완성도가 확 올라가요.
+        </p>
+
+        <div class="code" aria-label="체크리스트">
+✅ 로고/앱 아이콘 이미지 추가 (assets/logo.png)
+✅ 앱 스크린샷 3장 추가 (assets/s1.png, s2.png, s3.png)
+✅ 스토어 링크 버튼 연결 (Google Play / App Store)
+✅ 개인정보 처리방침 링크 연결
+✅ 문의 메일 주소 확정 (hello@...)
+        </div>
+
+        <p style="margin:12px 0 0; color:var(--muted); font-size:13px;">
+          원하면 다음 단계로 <b>스크린샷/로고 자리</b>까지 포함한 “완성 템플릿 버전”으로도 바꿔줄게.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const modal = $("modal");
+
+    function openModal(){ modal.classList.add("open"); }
+    function closeModal(){ modal.classList.remove("open"); }
+
+    ["btn-demo","btn-demo2","btn-demo3"].forEach(id => $(id).addEventListener("click", openModal));
+    $("btn-close").addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => { if(e.target === modal) closeModal(); });
+
+    $("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
