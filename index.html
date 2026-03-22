@@ -285,6 +285,108 @@
       font-size: 12px;
     }
 
+    /* 폰 목업 */
+    .phone-wrap{
+      display:flex; justify-content:center; align-items:flex-start;
+      padding:16px 0 8px;
+    }
+    .phone{
+      width:160px;
+      background: linear-gradient(160deg, #1a2240, #0f1628);
+      border-radius:32px;
+      border:2px solid rgba(255,255,255,.14);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.4),
+        0 24px 60px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.08);
+      padding:14px 10px 18px;
+      position:relative;
+    }
+    .phone:before{
+      content:"";
+      display:block;
+      width:52px; height:6px;
+      background: rgba(255,255,255,.12);
+      border-radius:999px;
+      margin:0 auto 12px;
+    }
+    .phone-screen{
+      background: linear-gradient(160deg, #0f1628, #0b1020);
+      border-radius:18px;
+      overflow:hidden;
+      padding:10px 8px;
+      display:flex; flex-direction:column; gap:6px;
+    }
+    .ps-bar{
+      height:6px; border-radius:999px;
+      background: linear-gradient(90deg, var(--brand), var(--brand2));
+      opacity:.7;
+    }
+    .ps-card{
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:10px;
+      padding:8px;
+    }
+    .ps-label{
+      font-size:7px; color:var(--muted); font-weight:700; letter-spacing:.3px;
+      display:block; margin-bottom:3px;
+    }
+    .ps-row{display:flex; gap:4px; margin-top:4px;}
+    .ps-chip{
+      flex:1; height:18px; border-radius:6px;
+      background: linear-gradient(135deg, rgba(124,92,255,.35), rgba(45,212,255,.25));
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .ps-chip.warm{
+      background: linear-gradient(135deg, rgba(51,209,122,.25), rgba(45,212,255,.2));
+    }
+    .ps-thumb{
+      height:52px; border-radius:8px;
+      background: linear-gradient(160deg, rgba(124,92,255,.3), rgba(45,212,255,.2));
+      border:1px solid rgba(255,255,255,.08);
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px;
+    }
+
+    /* 스토리 섹션 */
+    .story-quote{
+      border-left:3px solid var(--brand);
+      padding:8px 0 8px 20px;
+      margin:0 0 20px;
+      color:var(--text);
+      font-size:18px;
+      font-weight:700;
+      line-height:1.5;
+      letter-spacing:-.2px;
+    }
+    .team-roles{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;
+    }
+    .role-badge{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:7px 12px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      font-size:13px; font-weight:700;
+      color:var(--text);
+    }
+    .role-dot{
+      width:6px; height:6px; border-radius:99px;
+    }
+
+    /* 로드맵 상태 */
+    .step.done{border-color: rgba(51,209,122,.3); background: rgba(51,209,122,.04);}
+    .step.active{border-color: rgba(124,92,255,.4); background: rgba(124,92,255,.04);}
+    .step-header{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+    .status-chip{
+      display:inline-flex; padding:3px 8px; border-radius:999px;
+      font-size:11px; font-weight:800;
+    }
+    .status-chip.done{background:rgba(51,209,122,.15); color:var(--ok); border:1px solid rgba(51,209,122,.25);}
+    .status-chip.active{background:rgba(124,92,255,.15); color:var(--brand); border:1px solid rgba(124,92,255,.25);}
+    .status-chip.planned{background:rgba(255,255,255,.05); color:var(--muted); border:1px solid var(--line);}
+
     @media (max-width: 900px){
       .hero-grid{grid-template-columns:1fr}
       .mini{grid-template-columns:1fr}
@@ -292,6 +394,7 @@
       .split{grid-template-columns:1fr}
       .flow{grid-template-columns:1fr 1fr}
       .nav-links{display:none;}
+      .phone{width:140px;}
     }
     @media (max-width: 500px){
       .flow{grid-template-columns:1fr}
@@ -327,7 +430,7 @@
         <div class="hero-grid">
           <div class="card">
             <div class="hero-card">
-              <div class="kicker"><span class="dot"></span> 출시 준비 중</div>
+              <div class="kicker"><span class="dot"></span> App Store · Google Play 출시 중</div>
               <h1>내 옷장 + 오늘 날씨로<br/>AI가 "지금 입기 좋은 코디"를 추천합니다.</h1>
               <p class="lead">
                 Blue Wind는 <b>옷장 관리</b>와 <b>날씨 기반 코디 추천</b>을 한 번에 해결하는 패션 앱입니다.
@@ -363,10 +466,31 @@
           </div>
 
           <aside class="card side" aria-label="요약 카드">
-            <div class="metric">
-              <div class="label">제품 방향</div>
-              <div class="value">옷장 앱 + AI 코디</div>
-              <div class="desc">단순 추천이 아니라 "내 옷" 기준으로 현실적인 조합을 제안합니다.</div>
+            <div class="phone-wrap">
+              <div class="phone">
+                <div class="phone-screen">
+                  <div class="ps-card">
+                    <span class="ps-label">☀ 오늘 서울 · 12°C 맑음</span>
+                    <div class="ps-bar"></div>
+                  </div>
+                  <div class="ps-card">
+                    <span class="ps-label">AI 추천 코디</span>
+                    <div class="ps-thumb">👗</div>
+                    <div class="ps-row">
+                      <div class="ps-chip"></div>
+                      <div class="ps-chip warm"></div>
+                    </div>
+                  </div>
+                  <div class="ps-card">
+                    <span class="ps-label">내 옷장 · 등록된 옷 24벌</span>
+                    <div class="ps-row">
+                      <div class="ps-chip"></div>
+                      <div class="ps-chip"></div>
+                      <div class="ps-chip warm"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="metric">
               <div class="label">플랫폼</div>
@@ -382,6 +506,24 @@
         </div>
       </div>
 
+      <section id="story">
+        <div class="card hero-card" style="margin-bottom:0;">
+          <p class="story-quote">"옷장은 가득한데 매일 아침 뭘 입어야 할지 막막했습니다.<br/>그 문제를 직접 풀고 싶었습니다."</p>
+          <p style="color:var(--muted); font-size:14px; margin:0 0 6px;">
+            Blue Wind는 소규모 팀이 직접 겪은 불편함에서 시작했습니다.
+            단순한 AI 추천이 아니라, <b>내 실제 옷장</b>과 <b>오늘의 날씨</b>를 기반으로
+            현실적인 코디를 제안하는 앱을 만들고 있습니다.
+            첫 번째 앱에 이어 두 번째 앱도 개발 중입니다.
+          </p>
+          <div class="team-roles">
+            <span class="role-badge"><span class="role-dot" style="background:var(--brand)"></span>기획 · PM</span>
+            <span class="role-badge"><span class="role-dot" style="background:var(--brand2)"></span>iOS · Android 개발</span>
+            <span class="role-badge"><span class="role-dot" style="background:var(--ok)"></span>백엔드 · 인프라</span>
+            <span class="role-badge"><span class="role-dot" style="background:var(--warn)"></span>UI · UX 디자인</span>
+          </div>
+        </div>
+      </section>
+
       <section id="product">
         <div class="section-title">
           <h2>주요 기능</h2>
@@ -390,31 +532,37 @@
 
         <div class="grid3">
           <div class="feature">
+            <div style="font-size:28px; margin-bottom:8px;">🌤️</div>
             <span class="tag">WEATHER</span>
             <h3>날씨 기반 추천</h3>
             <p>기온·강수·체감 요소를 반영해 오늘 "현실적으로 입을 수 있는" 코디를 제안합니다.</p>
           </div>
           <div class="feature">
+            <div style="font-size:28px; margin-bottom:8px;">👗</div>
             <span class="tag">WARDROBE</span>
             <h3>내 옷장 관리</h3>
             <p>상의·하의·신발을 등록하고 소재·두께·색상·통기성 같은 특성을 기반으로 추천 정확도를 높입니다.</p>
           </div>
           <div class="feature">
+            <div style="font-size:28px; margin-bottom:8px;">✨</div>
             <span class="tag">AI</span>
             <h3>개인화 코디</h3>
             <p>취향과 상황(출근·주말·데이트 등)을 반영해 맥락 있는 코디 조합을 제안합니다.</p>
           </div>
           <div class="feature">
+            <div style="font-size:28px; margin-bottom:8px;">🖼️</div>
             <span class="tag">IMAGE</span>
             <h3>코디 시각화</h3>
             <p>코디를 입었을 때의 느낌을 이미지 합성·생성으로 빠르게 확인할 수 있습니다.</p>
           </div>
           <div class="feature">
+            <div style="font-size:28px; margin-bottom:8px;">📅</div>
             <span class="tag">HISTORY</span>
             <h3>추천 히스토리</h3>
             <p>지난 코디 추천을 저장·기록해 자신의 스타일 패턴을 파악하고 활용할 수 있습니다.</p>
           </div>
           <div class="feature">
+            <div style="font-size:28px; margin-bottom:8px;">📱</div>
             <span class="tag">UX</span>
             <h3>직관적인 인터페이스</h3>
             <p>모바일 중심으로 빠른 흐름: "옷 선택 → 추천 확인 → 저장/공유"까지 자연스럽게.</p>
@@ -459,17 +607,33 @@
           <p class="hint">가볍게 시작해 유저 피드백으로 빠르게 개선합니다.</p>
         </div>
 
-        <div class="step">
-          <span class="badge">Phase 1 · MVP</span>
+        <div class="step done">
+          <div class="step-header">
+            <span class="badge">Phase 1 · MVP</span>
+            <span class="status-chip done">✓ 완료</span>
+          </div>
           <p>옷장 등록 → 날씨 기반 코디 추천 → 추천 저장·히스토리 → 기본 UI/UX 안정화</p>
         </div>
-        <div class="step">
-          <span class="badge">Phase 2 · 개인화</span>
+        <div class="step active">
+          <div class="step-header">
+            <span class="badge">Phase 2 · 개인화</span>
+            <span class="status-chip active">● 진행 중</span>
+          </div>
           <p>취향·상황 반영, 코디 조합 다양화, 필터·정렬 고도화, "왜 이 조합인지" 설명 강화</p>
         </div>
         <div class="step">
-          <span class="badge">Phase 3 · 시각화</span>
+          <div class="step-header">
+            <span class="badge">Phase 3 · 시각화</span>
+            <span class="status-chip planned">예정</span>
+          </div>
           <p>이미지 합성·생성 기능 제공, 비용 최적화(캐시·모델·빈도 제어) 적용, 코디 공유 기능</p>
+        </div>
+        <div class="step">
+          <div class="step-header">
+            <span class="badge">Next · 두 번째 앱</span>
+            <span class="status-chip planned">개발 예정</span>
+          </div>
+          <p>Blue Wind에서 쌓은 기술과 경험을 바탕으로 새로운 문제를 해결하는 두 번째 앱을 준비 중입니다. 자세한 내용은 추후 공개됩니다.</p>
         </div>
       </section>
 
@@ -504,23 +668,35 @@
       <section id="contact">
         <div class="section-title">
           <h2>문의</h2>
-
+          <p class="hint">무엇이든 편하게 연락 주세요.</p>
         </div>
 
         <div class="feature">
-          <p style="margin:0 0 12px; color:var(--muted); font-size:13px;">
-            앱 출시 소식, 베타 테스트 참여, 비즈니스 협업 등 무엇이든 문의해 주세요.
+          <p style="margin:0 0 4px; font-size:16px; font-weight:700;">함께 만들어가고 싶은 분들을 기다립니다.</p>
+          <p style="margin:0 0 16px; color:var(--muted); font-size:14px;">
+            앱 피드백, 비즈니스 협업, 개발자·디자이너 합류 문의 등 어떤 이야기도 환영합니다.
           </p>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn primary" href="mailto:stylemate.helpdesk@gmail.com">이메일로 문의하기</a>
-            <a class="btn" href="#top">위로</a>
+            <a class="btn primary" href="mailto:stylemate.helpdesk@gmail.com">✉ 이메일로 연락하기</a>
+            <a class="btn" href="#top">↑ 맨 위로</a>
           </div>
         </div>
       </section>
 
       <footer>
+        <div class="footer-row" style="margin-bottom:14px;">
+          <div>
+            <div style="font-weight:800; margin-bottom:4px;">Blue Wind</div>
+            <div style="font-size:12px;">소규모 팀이 직접 기획·개발·운영합니다.</div>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <a href="/privacy.html" style="color:var(--muted); font-size:13px; text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:1px;">개인정보처리방침</a>
+            <span style="opacity:.4;">·</span>
+            <a href="mailto:stylemate.helpdesk@gmail.com" style="color:var(--muted); font-size:13px; text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:1px;">문의</a>
+          </div>
+        </div>
         <div class="footer-row">
-          <div>© <span id="year"></span> Blue Wind. All rights reserved.</div>
+          <div style="font-size:12px;">© <span id="year"></span> Blue Wind. All rights reserved.</div>
           <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
             <span class="kbd">패션 앱</span>
             <span style="opacity:.6;">·</span>
