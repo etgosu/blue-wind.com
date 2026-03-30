@@ -1,204 +1,331 @@
-html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>개인정보 처리방침 — 키즈 카메라</title>
-  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            "primary": "#2ECC71",
-            "primary-dark": "#27AE60",
-            "secondary": "#F1C40F",
-            "on-background": "#2C3E50",
-            "background": "#F8FEFA",
-            "surface": "#ffffff",
-            "on-surface": "#2C3E50",
-            "on-surface-variant": "#7F8C8D",
-            "outline": "#E0E0E0",
-          },
-          fontFamily: {
-            "headline": ["Plus Jakarta Sans", "sans-serif"],
-            "body": ["Be Vietnam Pro", "sans-serif"],
-          },
-        },
-      },
-    }
-  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>개인정보 처리방침</title>
+  <meta name="description" content="픽픽카메라 개인정보 처리방침" />
   <style>
-    body { font-family: "Be Vietnam Pro", sans-serif; }
-    .bg-soft-pattern {
-      background-color: #F8FEFA;
-      background-image: radial-gradient(#2ECC71 0.5px, transparent 0.5px);
-      background-size: 28px 28px;
+    :root {
+      --fg: #111;
+      --muted: #666;
+      --bg: #fff;
+      --border: #e5e7eb;
+      --link: #2563eb;
+      --codebg: #f6f8fa;
     }
-    .card-shadow { box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06); }
-    h2 { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; color: #2C3E50; margin-top: 2.5rem; margin-bottom: 0.75rem; font-size: 1.2rem; }
-    h3 { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 600; color: #27AE60; margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1rem; }
-    p { color: #4a5568; line-height: 1.8; margin-bottom: 0.75rem; }
-    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.875rem; }
-    th { background: #f0fdf4; color: #27AE60; font-weight: 600; padding: 0.6rem 0.8rem; border: 1px solid #d1fae5; text-align: left; }
-    td { padding: 0.6rem 0.8rem; border: 1px solid #e5e7eb; color: #374151; vertical-align: top; }
-    tr:nth-child(even) td { background: #fafafa; }
-    ul { list-style: none; padding: 0; margin: 0.5rem 0 0.75rem; }
-    ul li { padding: 0.25rem 0 0.25rem 1.4rem; position: relative; color: #4a5568; line-height: 1.7; }
-    ul li::before { content: "•"; position: absolute; left: 0.4rem; color: #2ECC71; font-weight: 700; }
-    .highlight-box { background: #f0fdf4; border-left: 4px solid #2ECC71; border-radius: 0 0.75rem 0.75rem 0; padding: 1rem 1.2rem; margin: 1rem 0; }
-    .highlight-box p { color: #166534; margin: 0; font-weight: 500; }
-    hr { border: none; border-top: 1px solid #e5e7eb; margin: 0.5rem 0; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+    }
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 28px 16px 64px;
+    }
+    header {
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    h1 {
+      font-size: 28px;
+      margin: 0 0 8px;
+      letter-spacing: -0.2px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    nav.toc {
+      margin: 18px 0 26px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fafafa;
+    }
+    nav.toc strong { display: block; margin-bottom: 8px; }
+    nav.toc a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    nav.toc a:hover { text-decoration: underline; }
+    section {
+      margin: 26px 0;
+      padding-top: 6px;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 18px 0 10px;
+      letter-spacing: -0.1px;
+    }
+    h3 {
+      font-size: 15px;
+      margin: 14px 0 8px;
+      letter-spacing: -0.05px;
+    }
+    ul { margin: 8px 0 0 18px; }
+    li { margin: 6px 0; }
+    .note {
+      border-left: 3px solid var(--border);
+      padding: 10px 12px;
+      margin: 10px 0;
+      color: var(--muted);
+      background: #fcfcfc;
+      border-radius: 8px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      padding: 2px 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    th { background: #fafafa; }
+    tr:last-child td { border-bottom: 0; }
+    a { color: var(--link); }
+    footer {
+      margin-top: 40px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    code {
+      background: var(--codebg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1px 6px;
+    }
   </style>
 </head>
-<body class="bg-soft-pattern text-on-surface antialiased">
 
-  <!-- Header -->
-  <header style="background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);" class="shadow-lg">
-    <div class="max-w-2xl mx-auto px-6 py-8">
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center text-2xl">📷</div>
-        <span class="text-white/80 font-body font-medium text-sm">키즈 카메라 (KidsCam)</span>
+<body>
+  <div class="container">
+    <header>
+      <h1>개인정보 처리방침 <span class="badge">V2.1</span></h1>
+      <div class="meta">
+        시행일: <strong>2026-03-30</strong><br/>
+        서비스명: <strong>픽픽카메라</strong><br/>
+        운영자: <strong>김영남/Bluewind</strong><br/>
+        문의: <strong>stylemate.helpdesk@gmail.com</strong>
       </div>
-      <h1 class="font-headline font-extrabold text-3xl text-white tracking-tight">개인정보 처리방침</h1>
-      <p class="text-white/75 text-sm mt-2 font-body">시행일: 2026년 3월 30일 &nbsp;|&nbsp; 버전: 2026-03-30</p>
-    </div>
-  </header>
+    </header>
 
-  <!-- Content -->
-  <main class="max-w-2xl mx-auto px-6 py-10 pb-20">
+    <nav class="toc" aria-label="목차">
+      <strong>목차</strong>
+      <ol>
+        <li><a href="#s1">수집하는 개인정보 항목</a></li>
+        <li><a href="#s2">개인정보 이용 목적</a></li>
+        <li><a href="#s3">사진·동영상 처리(기기 내 저장)</a></li>
+        <li><a href="#s4">로그인 및 계정 정보</a></li>
+        <li><a href="#s5">외부 서비스( Google / Supabase )</a></li>
+        <li><a href="#s6">보관 및 삭제</a></li>
+        <li><a href="#s7">이용자의 권리</a></li>
+        <li><a href="#s8">안전성 확보조치</a></li>
+        <li><a href="#s9">아동의 개인정보 보호</a></li>
+        <li><a href="#s10">변경 고지</a></li>
+        <li><a href="#s11">문의</a></li>
+      </ol>
+    </nav>
 
-    <div class="bg-white rounded-3xl card-shadow p-8 mb-6">
-      <div class="highlight-box mb-6">
-        <p>키즈 카메라는 아이가 찍은 사진과 동영상을 <strong>기기 안에만 보관</strong>하고, 서버로 전송하지 않습니다. 개인정보는 서비스 운영에 꼭 필요한 최소한으로만 수집합니다.</p>
-      </div>
+    <section id="s1">
+      <h2>1. 수집하는 개인정보 항목</h2>
 
-      <p>etgosu("회사")는 「개인정보 보호법」 및 관계 법령을 준수하며, 이용자(보호자)의 개인정보를 안전하게 처리하기 위하여 본 방침을 수립·공개합니다.</p>
+      <h3>1) 소셜 로그인 정보</h3>
+      <ul>
+        <li>이메일 주소</li>
+        <li>프로필 정보(닉네임 등, 소셜 로그인 제공 범위 내)</li>
+        <li>계정 식별자(Google 계정 고유 식별자)</li>
+      </ul>
 
-      <!-- 1 -->
-      <h2>제1조 수집하는 개인정보 항목</h2>
-
-      <h3>1-1. 서비스 가입 및 인증 (필수)</h3>
-      <table>
-        <tr><th>항목</th><th>수집 경로</th><th>목적</th></tr>
-        <tr><td>이메일 주소</td><td>Google OAuth</td><td>계정 식별·로그인</td></tr>
-        <tr><td>이름(닉네임)</td><td>Google OAuth</td><td>앱 내 표시명</td></tr>
-        <tr><td>Google 계정 고유 식별자</td><td>Google OAuth / Supabase Auth</td><td>계정 연결·중복 방지</td></tr>
-      </table>
-      <p>위 정보는 Google이 OAuth 과정에서 제공하며, 회사는 Supabase Auth를 통해 관리합니다. 별도 DB 테이블에 직접 저장하지 않습니다.</p>
-
-      <h3>1-2. 서비스 이용 기록 (필수)</h3>
-      <table>
-        <tr><th>항목</th><th>저장 위치</th><th>목적</th></tr>
-        <tr><td>약관 동의 버전 및 일시</td><td>Supabase (user_consents)</td><td>약관 동의 이력 관리</td></tr>
-        <tr><td>기기 언어 설정, 플랫폼(iOS/Android), 앱 버전</td><td>Supabase (user_consents)</td><td>동의 이력 부가 정보</td></tr>
-      </table>
-
-      <h3>1-3. 서비스 탈퇴 감사 로그</h3>
-      <table>
-        <tr><th>항목</th><th>저장 위치</th><th>보존 기간</th></tr>
-        <tr><td>탈퇴한 사용자 UUID, 추적 ID, 탈퇴 일시</td><td>Supabase (account_deletion_audit)</td><td>영구 보존 (법적 근거)</td></tr>
-      </table>
-
-      <h3>1-4. 수집하지 않는 정보</h3>
-      <div class="highlight-box">
-        <p>사진·동영상 파일은 <strong>기기 내 앱 전용 스토리지에만 저장</strong>되며, 서버(Supabase Storage 포함)로 업로드되지 않습니다. 회사는 이용자의 사진·동영상을 열람·수집·처리하지 않습니다.</p>
+      <div class="note">
+        본 서비스는 <strong>별도의 이메일 회원가입</strong>을 제공하지 않으며, <strong>Google OAuth 로그인</strong>을 통해 계정을 생성/인증합니다.
       </div>
 
-      <!-- 2 -->
-      <h2>제2조 개인정보 수집·이용 목적</h2>
+      <h3>2) 사용자 입력 정보(서비스 이용 데이터)</h3>
       <ul>
-        <li>본인 확인 및 서비스 로그인(Google OAuth)</li>
-        <li>이용약관 및 개인정보 처리방침 동의 이력 관리</li>
-        <li>회원 탈퇴 요청 처리 및 감사 기록 유지</li>
-        <li>법령상 의무 이행 및 분쟁 해결</li>
+        <li>촬영한 사진 및 동영상의 메타데이터(파일명, 생성 시각 등)</li>
+        <li>보관함에서 사용자가 직접 입력한 메모(있는 경우)</li>
+        <li>약관 및 개인정보 처리방침 동의 이력</li>
       </ul>
 
-      <!-- 3 -->
-      <h2>제3조 개인정보 보유 및 이용 기간</h2>
-      <table>
-        <tr><th>항목</th><th>보존 기간</th><th>근거</th></tr>
-        <tr><td>Google OAuth 계정 정보</td><td>회원 탈퇴 시 즉시 삭제</td><td>이용 계약 종료</td></tr>
-        <tr><td>약관 동의 이력 (user_consents)</td><td>회원 탈퇴 시 연쇄 삭제</td><td>이용 계약 종료</td></tr>
-        <tr><td>탈퇴 감사 로그 (account_deletion_audit)</td><td>영구 보존</td><td>법적 분쟁 대비</td></tr>
+      <h3>3) 서비스 이용 과정에서 자동 수집되는 정보</h3>
+      <ul>
+        <li>기기/앱 정보: OS 버전, 기기 모델, 앱 버전, 언어 설정 등</li>
+        <li>접속/이용 기록: 접속 로그, 오류 로그(크래시/진단 정보), IP 등(가능한 범위)</li>
+      </ul>
+
+      <div class="note">
+        <strong>위치정보는 수집하지 않습니다.</strong> GPS 권한을 요청하지 않으며 위치 기반 기능을 제공하지 않습니다.
+      </div>
+    </section>
+
+    <section id="s2">
+      <h2>2. 개인정보 이용 목적</h2>
+      <ul>
+        <li>계정 식별 및 로그인 유지</li>
+        <li>사진·동영상 보관함 제공 및 조회</li>
+        <li>약관/개인정보 처리방침 동의 이력 관리</li>
+        <li>서비스 품질 개선(오류 분석, 성능 개선)</li>
+        <li>문의 대응 및 분쟁 처리</li>
+      </ul>
+    </section>
+
+    <section id="s3">
+      <h2>3. 사진·동영상 처리(기기 내 저장)</h2>
+      <p>
+        픽픽카메라는 사용자가 촬영한 사진과 동영상을 <strong>기기 내 앱 전용 저장소</strong>에만 보관합니다.
+      </p>
+      <ul>
+        <li>촬영 파일은 서버로 자동 업로드되지 않습니다.</li>
+        <li>보관함 데이터는 앱 삭제 시 함께 삭제될 수 있습니다.</li>
+        <li>이용자가 선택한 파일만 기기 갤러리로 내보내기 할 수 있습니다.</li>
+      </ul>
+      <div class="note">
+        회사는 이용자의 사진·동영상을 열람하거나 수집하여 별도 서버에 저장하지 않습니다.
+      </div>
+    </section>
+
+    <section id="s4">
+      <h2>4. 로그인 및 계정 정보</h2>
+      <ul>
+        <li>계정은 Google 로그인 기반으로 관리됩니다.</li>
+        <li>동의 버전, 동의 시각, 기기 언어, 플랫폼 정보가 저장될 수 있습니다.</li>
+        <li>회원 탈퇴 시 계정 관련 정보와 동의 이력은 삭제됩니다.</li>
+      </ul>
+    </section>
+
+    <section id="s5">
+      <h2>5. 외부 서비스(Google / Supabase)</h2>
+
+      <table aria-label="외부 서비스">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>업체</th>
+            <th>목적</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>인증</td>
+            <td>Google</td>
+            <td>OAuth 로그인 및 계정 식별</td>
+          </tr>
+          <tr>
+            <td>데이터 저장</td>
+            <td>Supabase</td>
+            <td>동의 이력 및 계정 데이터 관리</td>
+          </tr>
+        </tbody>
       </table>
 
-      <!-- 4 -->
-      <h2>제4조 개인정보의 제3자 제공</h2>
-      <p>회사는 이용자의 개인정보를 원칙적으로 제3자에게 제공하지 않습니다. 다음의 경우에는 예외로 합니다.</p>
-      <ul>
-        <li>이용자가 사전에 동의한 경우</li>
-        <li>법령에 의거하거나 수사기관의 적법한 요청이 있는 경우</li>
-      </ul>
+      <div class="note">
+        서비스 제공을 위해 일부 데이터가 외부 서비스로 전송될 수 있으며, 해당 서비스의 정책이 적용됩니다.
+      </div>
+    </section>
 
-      <!-- 5 -->
-      <h2>제5조 개인정보 처리 위탁</h2>
-      <table>
-        <tr><th>수탁 업체</th><th>위탁 업무</th></tr>
-        <tr><td>Google LLC</td><td>OAuth 인증(Google 로그인) 처리</td></tr>
-        <tr><td>Supabase Inc.</td><td>사용자 인증 정보 및 동의 이력 데이터베이스 관리</td></tr>
+    <section id="s6">
+      <h2>6. 보관 및 삭제</h2>
+      <ul>
+        <li>개인정보는 서비스 제공 기간 동안 보관됩니다.</li>
+        <li>회원 탈퇴 시 계정 관련 정보는 삭제됩니다.</li>
+        <li>기기 내 사진·동영상은 앱 삭제 또는 기기 초기화 시 함께 삭제될 수 있습니다.</li>
+        <li>법령상 보관 의무가 있는 정보는 해당 기간 동안 보관됩니다.</li>
+      </ul>
+    </section>
+
+    <section id="s7">
+      <h2>7. 이용자의 권리</h2>
+      <ul>
+        <li>개인정보 열람/정정/삭제 요구</li>
+        <li>처리 정지 요구</li>
+        <li>계정 삭제 및 기록 삭제 요청</li>
+      </ul>
+      <p class="note">
+        요청은 앱 내 기능 또는 상단의 문의 이메일을 통해 접수할 수 있습니다.
+      </p>
+    </section>
+
+    <section id="s8">
+      <h2>8. 안전성 확보조치</h2>
+      <ul>
+        <li>접근권한 최소화 및 접근통제</li>
+        <li>전송구간 암호화(HTTPS)</li>
+        <li>취약점 점검 및 업데이트</li>
+        <li>오류/진단 데이터 최소 수집 및 관리</li>
+      </ul>
+    </section>
+
+    <section id="s9">
+      <h2>9. 아동의 개인정보 보호</h2>
+      <p>
+        본 서비스는 보호자 계정으로 이용되며, 아이가 촬영한 사진·동영상은 보호자의 기기 내에만 저장됩니다.
+      </p>
+      <div class="note">
+        아이의 실명, 주소, 연락처 등 불필요한 개인정보는 입력하지 않도록 주의해 주세요.
+      </div>
+    </section>
+
+    <section id="s10">
+      <h2>10. 변경 고지</h2>
+      <p>
+        본 개인정보 처리방침은 법령 또는 서비스 변경에 따라 수정될 수 있으며, 변경 시 앱 내 공지 또는 게시 페이지를 통해 안내합니다.
+      </p>
+    </section>
+
+    <section id="s11">
+      <h2>11. 문의</h2>
+      <table aria-label="문의 정보">
+        <thead>
+          <tr>
+            <th>항목</th>
+            <th>내용</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>서비스명</td>
+            <td>픽픽카메라</td>
+          </tr>
+          <tr>
+            <td>운영자</td>
+            <td>김영남/Bluewind</td>
+          </tr>
+          <tr>
+            <td>문의 이메일</td>
+            <td>stylemate.helpdesk@gmail.com</td>
+          </tr>
+        </tbody>
       </table>
-      <p>각 수탁사는 해당 서비스 고유의 개인정보 처리방침을 적용합니다.</p>
+    </section>
 
-      <!-- 6 -->
-      <h2>제6조 이용자의 권리와 행사 방법</h2>
-      <p>이용자는 언제든지 다음 권리를 행사할 수 있습니다.</p>
-      <ul>
-        <li><strong>열람 요청</strong>: 보유 중인 개인정보 확인</li>
-        <li><strong>정정 요청</strong>: 부정확한 정보 수정</li>
-        <li><strong>삭제 요청(회원 탈퇴)</strong>: 앱 내 설정 → 회원 탈퇴 메뉴를 통해 직접 처리 가능</li>
-        <li><strong>처리 정지 요청</strong>: 이메일로 접수</li>
-      </ul>
-      <p>회원 탈퇴 시 계정 관련 개인정보(Google 계정 정보, 동의 이력)는 즉시 삭제됩니다. 단, 기기에 저장된 사진·동영상은 앱 삭제 시 함께 삭제됩니다.</p>
-
-      <!-- 7 -->
-      <h2>제7조 개인정보 자동 수집 장치</h2>
-      <p>본 앱은 쿠키(Cookie)를 사용하지 않습니다. 서비스 운영에 필요한 최소한의 세션 토큰만 기기 내 안전한 저장소에 보관합니다.</p>
-
-      <!-- 8 -->
-      <h2>제8조 개인정보 안전성 확보 조치</h2>
-      <ul>
-        <li>Supabase 행 수준 보안(RLS): 본인 데이터만 접근 가능</li>
-        <li>서비스 롤 키(Service Role Key)는 서버 Edge Function 환경 변수에만 저장, 클라이언트 노출 금지</li>
-        <li>사진·동영상은 서버로 전송하지 않아 데이터 유출 위험 최소화</li>
-        <li>HTTPS를 통한 모든 API 통신 암호화</li>
-      </ul>
-
-      <!-- 9 -->
-      <h2>제9조 아동의 개인정보 보호</h2>
-      <p>본 서비스의 계정 이용자는 만 14세 이상의 보호자입니다. 앱 자체는 아이(자녀)가 카메라를 사용하는 용도이나, <strong>아이의 개인정보는 수집하지 않습니다</strong>. 아이가 촬영한 사진·동영상은 보호자의 기기 내에만 저장됩니다.</p>
-
-      <!-- 10 -->
-      <h2>제10조 개인정보 처리방침 변경</h2>
-      <p>본 방침을 변경하는 경우 앱 내 공지 또는 이메일을 통해 사전 안내합니다. 약관 버전이 변경될 경우 로그인 시 재동의를 요청합니다.</p>
-
-      <!-- 11 -->
-      <h2>제11조 개인정보 보호책임자 및 문의</h2>
-      <table>
-        <tr><th>항목</th><th>내용</th></tr>
-        <tr><td>서비스명</td><td>키즈 카메라 (KidsCam)</td></tr>
-        <tr><td>운영자</td><td>etgosu</td></tr>
-        <tr><td>문의 이메일</td><td>etgosu@gmail.com</td></tr>
-      </table>
-      <p>개인정보 관련 불만·침해 신고는 아래 기관에도 접수할 수 있습니다.</p>
-      <ul>
-        <li>개인정보 침해 신고센터: <a href="https://privacy.kisa.or.kr" target="_blank" rel="noopener" style="color:#2ECC71;">privacy.kisa.or.kr</a> (국번없이 118)</li>
-        <li>개인정보 분쟁조정위원회: <a href="https://www.kopico.go.kr" target="_blank" rel="noopener" style="color:#2ECC71;">www.kopico.go.kr</a></li>
-        <li>대검찰청 사이버수사과: <a href="https://www.spo.go.kr" target="_blank" rel="noopener" style="color:#2ECC71;">www.spo.go.kr</a> (국번없이 1301)</li>
-        <li>경찰청 사이버안전국: <a href="https://ecrm.cyber.go.kr" target="_blank" rel="noopener" style="color:#2ECC71;">ecrm.cyber.go.kr</a> (국번없이 182)</li>
-      </ul>
-    </div>
-
-    <!-- Footer nav -->
-    <div class="flex justify-center gap-6 text-sm text-on-surface-variant">
-      <a href="terms.html" style="color:#2ECC71;" class="font-medium hover:underline">이용약관 보기</a>
-    </div>
-  </main>
-
-  <footer class="text-center py-6 text-xs text-on-surface-variant bg-white border-t border-outline">
-    © 2026 etgosu · 키즈 카메라 &nbsp;|&nbsp; 시행일: 2026년 3월 30일
-  </footer>
-
+    <footer>
+      <div><strong>개요</strong>: Google 로그인, Supabase 저장, 기기 내 사진·동영상 보관</div>
+      <div style="margin-top:8px;">© 2026 김영남/Bluewind. All rights reserved.</div>
+    </footer>
+  </div>
 </body>
 </html>
