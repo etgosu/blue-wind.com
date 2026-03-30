@@ -1,0 +1,204 @@
+html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>개인정보 처리방침 — 키즈 카메라</title>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#2ECC71",
+            "primary-dark": "#27AE60",
+            "secondary": "#F1C40F",
+            "on-background": "#2C3E50",
+            "background": "#F8FEFA",
+            "surface": "#ffffff",
+            "on-surface": "#2C3E50",
+            "on-surface-variant": "#7F8C8D",
+            "outline": "#E0E0E0",
+          },
+          fontFamily: {
+            "headline": ["Plus Jakarta Sans", "sans-serif"],
+            "body": ["Be Vietnam Pro", "sans-serif"],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { font-family: "Be Vietnam Pro", sans-serif; }
+    .bg-soft-pattern {
+      background-color: #F8FEFA;
+      background-image: radial-gradient(#2ECC71 0.5px, transparent 0.5px);
+      background-size: 28px 28px;
+    }
+    .card-shadow { box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06); }
+    h2 { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; color: #2C3E50; margin-top: 2.5rem; margin-bottom: 0.75rem; font-size: 1.2rem; }
+    h3 { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 600; color: #27AE60; margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1rem; }
+    p { color: #4a5568; line-height: 1.8; margin-bottom: 0.75rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.875rem; }
+    th { background: #f0fdf4; color: #27AE60; font-weight: 600; padding: 0.6rem 0.8rem; border: 1px solid #d1fae5; text-align: left; }
+    td { padding: 0.6rem 0.8rem; border: 1px solid #e5e7eb; color: #374151; vertical-align: top; }
+    tr:nth-child(even) td { background: #fafafa; }
+    ul { list-style: none; padding: 0; margin: 0.5rem 0 0.75rem; }
+    ul li { padding: 0.25rem 0 0.25rem 1.4rem; position: relative; color: #4a5568; line-height: 1.7; }
+    ul li::before { content: "•"; position: absolute; left: 0.4rem; color: #2ECC71; font-weight: 700; }
+    .highlight-box { background: #f0fdf4; border-left: 4px solid #2ECC71; border-radius: 0 0.75rem 0.75rem 0; padding: 1rem 1.2rem; margin: 1rem 0; }
+    .highlight-box p { color: #166534; margin: 0; font-weight: 500; }
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 0.5rem 0; }
+  </style>
+</head>
+<body class="bg-soft-pattern text-on-surface antialiased">
+
+  <!-- Header -->
+  <header style="background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);" class="shadow-lg">
+    <div class="max-w-2xl mx-auto px-6 py-8">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center text-2xl">📷</div>
+        <span class="text-white/80 font-body font-medium text-sm">키즈 카메라 (KidsCam)</span>
+      </div>
+      <h1 class="font-headline font-extrabold text-3xl text-white tracking-tight">개인정보 처리방침</h1>
+      <p class="text-white/75 text-sm mt-2 font-body">시행일: 2026년 3월 30일 &nbsp;|&nbsp; 버전: 2026-03-30</p>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="max-w-2xl mx-auto px-6 py-10 pb-20">
+
+    <div class="bg-white rounded-3xl card-shadow p-8 mb-6">
+      <div class="highlight-box mb-6">
+        <p>키즈 카메라는 아이가 찍은 사진과 동영상을 <strong>기기 안에만 보관</strong>하고, 서버로 전송하지 않습니다. 개인정보는 서비스 운영에 꼭 필요한 최소한으로만 수집합니다.</p>
+      </div>
+
+      <p>etgosu("회사")는 「개인정보 보호법」 및 관계 법령을 준수하며, 이용자(보호자)의 개인정보를 안전하게 처리하기 위하여 본 방침을 수립·공개합니다.</p>
+
+      <!-- 1 -->
+      <h2>제1조 수집하는 개인정보 항목</h2>
+
+      <h3>1-1. 서비스 가입 및 인증 (필수)</h3>
+      <table>
+        <tr><th>항목</th><th>수집 경로</th><th>목적</th></tr>
+        <tr><td>이메일 주소</td><td>Google OAuth</td><td>계정 식별·로그인</td></tr>
+        <tr><td>이름(닉네임)</td><td>Google OAuth</td><td>앱 내 표시명</td></tr>
+        <tr><td>Google 계정 고유 식별자</td><td>Google OAuth / Supabase Auth</td><td>계정 연결·중복 방지</td></tr>
+      </table>
+      <p>위 정보는 Google이 OAuth 과정에서 제공하며, 회사는 Supabase Auth를 통해 관리합니다. 별도 DB 테이블에 직접 저장하지 않습니다.</p>
+
+      <h3>1-2. 서비스 이용 기록 (필수)</h3>
+      <table>
+        <tr><th>항목</th><th>저장 위치</th><th>목적</th></tr>
+        <tr><td>약관 동의 버전 및 일시</td><td>Supabase (user_consents)</td><td>약관 동의 이력 관리</td></tr>
+        <tr><td>기기 언어 설정, 플랫폼(iOS/Android), 앱 버전</td><td>Supabase (user_consents)</td><td>동의 이력 부가 정보</td></tr>
+      </table>
+
+      <h3>1-3. 서비스 탈퇴 감사 로그</h3>
+      <table>
+        <tr><th>항목</th><th>저장 위치</th><th>보존 기간</th></tr>
+        <tr><td>탈퇴한 사용자 UUID, 추적 ID, 탈퇴 일시</td><td>Supabase (account_deletion_audit)</td><td>영구 보존 (법적 근거)</td></tr>
+      </table>
+
+      <h3>1-4. 수집하지 않는 정보</h3>
+      <div class="highlight-box">
+        <p>사진·동영상 파일은 <strong>기기 내 앱 전용 스토리지에만 저장</strong>되며, 서버(Supabase Storage 포함)로 업로드되지 않습니다. 회사는 이용자의 사진·동영상을 열람·수집·처리하지 않습니다.</p>
+      </div>
+
+      <!-- 2 -->
+      <h2>제2조 개인정보 수집·이용 목적</h2>
+      <ul>
+        <li>본인 확인 및 서비스 로그인(Google OAuth)</li>
+        <li>이용약관 및 개인정보 처리방침 동의 이력 관리</li>
+        <li>회원 탈퇴 요청 처리 및 감사 기록 유지</li>
+        <li>법령상 의무 이행 및 분쟁 해결</li>
+      </ul>
+
+      <!-- 3 -->
+      <h2>제3조 개인정보 보유 및 이용 기간</h2>
+      <table>
+        <tr><th>항목</th><th>보존 기간</th><th>근거</th></tr>
+        <tr><td>Google OAuth 계정 정보</td><td>회원 탈퇴 시 즉시 삭제</td><td>이용 계약 종료</td></tr>
+        <tr><td>약관 동의 이력 (user_consents)</td><td>회원 탈퇴 시 연쇄 삭제</td><td>이용 계약 종료</td></tr>
+        <tr><td>탈퇴 감사 로그 (account_deletion_audit)</td><td>영구 보존</td><td>법적 분쟁 대비</td></tr>
+      </table>
+
+      <!-- 4 -->
+      <h2>제4조 개인정보의 제3자 제공</h2>
+      <p>회사는 이용자의 개인정보를 원칙적으로 제3자에게 제공하지 않습니다. 다음의 경우에는 예외로 합니다.</p>
+      <ul>
+        <li>이용자가 사전에 동의한 경우</li>
+        <li>법령에 의거하거나 수사기관의 적법한 요청이 있는 경우</li>
+      </ul>
+
+      <!-- 5 -->
+      <h2>제5조 개인정보 처리 위탁</h2>
+      <table>
+        <tr><th>수탁 업체</th><th>위탁 업무</th></tr>
+        <tr><td>Google LLC</td><td>OAuth 인증(Google 로그인) 처리</td></tr>
+        <tr><td>Supabase Inc.</td><td>사용자 인증 정보 및 동의 이력 데이터베이스 관리</td></tr>
+      </table>
+      <p>각 수탁사는 해당 서비스 고유의 개인정보 처리방침을 적용합니다.</p>
+
+      <!-- 6 -->
+      <h2>제6조 이용자의 권리와 행사 방법</h2>
+      <p>이용자는 언제든지 다음 권리를 행사할 수 있습니다.</p>
+      <ul>
+        <li><strong>열람 요청</strong>: 보유 중인 개인정보 확인</li>
+        <li><strong>정정 요청</strong>: 부정확한 정보 수정</li>
+        <li><strong>삭제 요청(회원 탈퇴)</strong>: 앱 내 설정 → 회원 탈퇴 메뉴를 통해 직접 처리 가능</li>
+        <li><strong>처리 정지 요청</strong>: 이메일로 접수</li>
+      </ul>
+      <p>회원 탈퇴 시 계정 관련 개인정보(Google 계정 정보, 동의 이력)는 즉시 삭제됩니다. 단, 기기에 저장된 사진·동영상은 앱 삭제 시 함께 삭제됩니다.</p>
+
+      <!-- 7 -->
+      <h2>제7조 개인정보 자동 수집 장치</h2>
+      <p>본 앱은 쿠키(Cookie)를 사용하지 않습니다. 서비스 운영에 필요한 최소한의 세션 토큰만 기기 내 안전한 저장소에 보관합니다.</p>
+
+      <!-- 8 -->
+      <h2>제8조 개인정보 안전성 확보 조치</h2>
+      <ul>
+        <li>Supabase 행 수준 보안(RLS): 본인 데이터만 접근 가능</li>
+        <li>서비스 롤 키(Service Role Key)는 서버 Edge Function 환경 변수에만 저장, 클라이언트 노출 금지</li>
+        <li>사진·동영상은 서버로 전송하지 않아 데이터 유출 위험 최소화</li>
+        <li>HTTPS를 통한 모든 API 통신 암호화</li>
+      </ul>
+
+      <!-- 9 -->
+      <h2>제9조 아동의 개인정보 보호</h2>
+      <p>본 서비스의 계정 이용자는 만 14세 이상의 보호자입니다. 앱 자체는 아이(자녀)가 카메라를 사용하는 용도이나, <strong>아이의 개인정보는 수집하지 않습니다</strong>. 아이가 촬영한 사진·동영상은 보호자의 기기 내에만 저장됩니다.</p>
+
+      <!-- 10 -->
+      <h2>제10조 개인정보 처리방침 변경</h2>
+      <p>본 방침을 변경하는 경우 앱 내 공지 또는 이메일을 통해 사전 안내합니다. 약관 버전이 변경될 경우 로그인 시 재동의를 요청합니다.</p>
+
+      <!-- 11 -->
+      <h2>제11조 개인정보 보호책임자 및 문의</h2>
+      <table>
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>서비스명</td><td>키즈 카메라 (KidsCam)</td></tr>
+        <tr><td>운영자</td><td>etgosu</td></tr>
+        <tr><td>문의 이메일</td><td>etgosu@gmail.com</td></tr>
+      </table>
+      <p>개인정보 관련 불만·침해 신고는 아래 기관에도 접수할 수 있습니다.</p>
+      <ul>
+        <li>개인정보 침해 신고센터: <a href="https://privacy.kisa.or.kr" target="_blank" rel="noopener" style="color:#2ECC71;">privacy.kisa.or.kr</a> (국번없이 118)</li>
+        <li>개인정보 분쟁조정위원회: <a href="https://www.kopico.go.kr" target="_blank" rel="noopener" style="color:#2ECC71;">www.kopico.go.kr</a></li>
+        <li>대검찰청 사이버수사과: <a href="https://www.spo.go.kr" target="_blank" rel="noopener" style="color:#2ECC71;">www.spo.go.kr</a> (국번없이 1301)</li>
+        <li>경찰청 사이버안전국: <a href="https://ecrm.cyber.go.kr" target="_blank" rel="noopener" style="color:#2ECC71;">ecrm.cyber.go.kr</a> (국번없이 182)</li>
+      </ul>
+    </div>
+
+    <!-- Footer nav -->
+    <div class="flex justify-center gap-6 text-sm text-on-surface-variant">
+      <a href="terms.html" style="color:#2ECC71;" class="font-medium hover:underline">이용약관 보기</a>
+    </div>
+  </main>
+
+  <footer class="text-center py-6 text-xs text-on-surface-variant bg-white border-t border-outline">
+    © 2026 etgosu · 키즈 카메라 &nbsp;|&nbsp; 시행일: 2026년 3월 30일
+  </footer>
+
+</body>
+</html>
