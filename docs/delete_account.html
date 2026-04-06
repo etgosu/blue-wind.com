@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>계정 삭제 요청 — 키즈 카메라</title>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#2ECC71",
+            "primary-dark": "#27AE60",
+            "secondary": "#F1C40F",
+            "on-background": "#2C3E50",
+            "background": "#F8FEFA",
+            "surface": "#ffffff",
+            "on-surface": "#2C3E50",
+            "on-surface-variant": "#7F8C8D",
+            "outline": "#E0E0E0",
+          },
+          fontFamily: {
+            "headline": ["Plus Jakarta Sans", "sans-serif"],
+            "body": ["Be Vietnam Pro", "sans-serif"],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { font-family: "Be Vietnam Pro", sans-serif; }
+    .bg-soft-pattern {
+      background-color: #F8FEFA;
+      background-image: radial-gradient(#2ECC71 0.5px, transparent 0.5px);
+      background-size: 28px 28px;
+    }
+    .card-shadow { box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06); }
+    h2 { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; color: #2C3E50; margin-top: 2.5rem; margin-bottom: 0.75rem; font-size: 1.2rem; }
+    p { color: #4a5568; line-height: 1.8; margin-bottom: 0.75rem; }
+    .step-num { width: 2rem; height: 2rem; background: #2ECC71; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; font-size: 0.875rem; flex-shrink: 0; }
+    .highlight-box { background: #f0fdf4; border-left: 4px solid #2ECC71; border-radius: 0 0.75rem 0.75rem 0; padding: 1rem 1.2rem; margin: 1rem 0; }
+    .highlight-box p { color: #166534; margin: 0; font-weight: 500; }
+    .warn-box { background: #fefce8; border-left: 4px solid #F1C40F; border-radius: 0 0.75rem 0.75rem 0; padding: 1rem 1.2rem; margin: 1rem 0; }
+    .warn-box p { color: #713f12; margin: 0; font-weight: 500; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.875rem; }
+    th { background: #f0fdf4; color: #27AE60; font-weight: 600; padding: 0.6rem 0.8rem; border: 1px solid #d1fae5; text-align: left; }
+    td { padding: 0.6rem 0.8rem; border: 1px solid #e5e7eb; color: #374151; vertical-align: top; }
+    tr:nth-child(even) td { background: #fafafa; }
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 0.5rem 0; }
+  </style>
+</head>
+<body class="bg-soft-pattern text-on-surface antialiased">
+
+  <!-- Header -->
+  <header style="background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);" class="shadow-lg">
+    <div class="max-w-2xl mx-auto px-6 py-8">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center text-2xl">📷</div>
+        <span class="text-white/80 font-body font-medium text-sm">키즈 카메라 (KidsCam)</span>
+      </div>
+      <h1 class="font-headline font-extrabold text-3xl text-white tracking-tight">계정 삭제 요청</h1>
+      <p class="text-white/75 text-sm mt-2 font-body">이메일을 통해 계정 삭제를 요청할 수 있습니다.</p>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="max-w-2xl mx-auto px-6 py-10 pb-20">
+    <div class="bg-white rounded-3xl card-shadow p-8 mb-6">
+
+      <!-- 안내 -->
+      <div class="highlight-box" style="margin-top: 0;">
+        <p>계정 삭제는 <strong>이메일 요청</strong> 방식으로 처리됩니다. 아래 안내에 따라 요청해 주시면 영업일 기준 3일 이내 처리해 드립니다.</p>
+      </div>
+
+      <!-- 삭제 요청 방법 -->
+      <h2>계정 삭제 요청 방법</h2>
+      <div class="space-y-4 mt-4">
+
+        <div class="flex gap-4 items-start">
+          <div class="step-num">1</div>
+          <div>
+            <p class="font-semibold text-on-surface mb-1" style="color:#2C3E50; font-family:'Plus Jakarta Sans',sans-serif;">이메일 작성</p>
+            <p style="margin:0;">아래 이메일 주소로 계정 삭제 요청 메일을 보내주세요.</p>
+            <a href="mailto:etgosu@gmail.com?subject=계정 삭제 요청&body=안녕하세요.%0A%0A아래 정보로 계정 삭제를 요청합니다.%0A%0A- 가입 이메일(Google 계정): %0A- 요청 사유(선택): %0A%0A감사합니다."
+               style="display:inline-block; margin-top:0.5rem; background:#2ECC71; color:white; padding:0.5rem 1.2rem; border-radius:0.5rem; font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; font-size:0.9rem; text-decoration:none;">
+              ✉️ etgosu@gmail.com
+            </a>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start">
+          <div class="step-num">2</div>
+          <div>
+            <p class="font-semibold text-on-surface mb-1" style="color:#2C3E50; font-family:'Plus Jakarta Sans',sans-serif;">이메일 제목</p>
+            <p style="margin:0;">제목을 아래와 같이 작성해 주세요.</p>
+            <div style="background:#f3f4f6; border-radius:0.5rem; padding:0.6rem 1rem; margin-top:0.5rem; font-family:monospace; font-size:0.9rem; color:#374151;">
+              계정 삭제 요청
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start">
+          <div class="step-num">3</div>
+          <div>
+            <p class="font-semibold text-on-surface mb-1" style="color:#2C3E50; font-family:'Plus Jakarta Sans',sans-serif;">본문 내용</p>
+            <p style="margin:0;">이메일 본문에 아래 정보를 포함해 주세요.</p>
+            <div style="background:#f3f4f6; border-radius:0.5rem; padding:0.6rem 1rem; margin-top:0.5rem; font-size:0.875rem; color:#374151; line-height:1.8;">
+              • 가입 이메일(Google 계정)<br/>
+              • 요청 사유 (선택 사항)
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start">
+          <div class="step-num">4</div>
+          <div>
+            <p class="font-semibold text-on-surface mb-1" style="color:#2C3E50; font-family:'Plus Jakarta Sans',sans-serif;">처리 완료 안내</p>
+            <p style="margin:0;">요청 접수 후 <strong>영업일 기준 3일 이내</strong>에 처리 결과를 이메일로 안내해 드립니다.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 삭제되는 데이터 -->
+      <h2>삭제되는 데이터</h2>
+      <table>
+        <tr><th>데이터 항목</th><th>처리</th></tr>
+        <tr><td>Google 계정 연결 정보</td><td>즉시 영구 삭제</td></tr>
+        <tr><td>약관 동의 이력</td><td>즉시 영구 삭제</td></tr>
+        <tr><td>탈퇴 감사 로그 (user_id, 탈퇴 일시)</td><td>법적 근거로 보존</td></tr>
+        <tr><td>기기 내 사진·동영상 (보관함)</td><td>앱 삭제 시 함께 삭제 (자동 삭제 안 됨)</td></tr>
+      </table>
+
+      <!-- 주의사항 -->
+      <div class="warn-box">
+        <p>⚠️ <strong>계정 삭제 전, 앱 보관함의 사진·동영상을 기기 갤러리로 내보내기 하세요.</strong> 앱 삭제 시 보관함 데이터는 복구되지 않습니다.</p>
+      </div>
+
+      <hr style="margin-top: 2rem; margin-bottom: 1.5rem;"/>
+
+      <!-- 문의 -->
+      <h2 style="margin-top:0;">문의</h2>
+      <table>
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>서비스명</td><td>키즈 카메라 (KidsCam)</td></tr>
+        <tr><td>운영자</td><td>etgosu</td></tr>
+        <tr><td>문의 이메일</td><td>etgosu@gmail.com</td></tr>
+      </table>
+
+    </div>
+
+    <!-- Footer nav -->
+    <div class="flex justify-center gap-6 text-sm text-on-surface-variant">
+      <a href="terms.html" style="color:#2ECC71;" class="font-medium hover:underline">이용약관 보기</a>
+      <span>·</span>
+      <a href="privacy.html" style="color:#2ECC71;" class="font-medium hover:underline">개인정보 처리방침 보기</a>
+    </div>
+  </main>
+
+  <footer class="text-center py-6 text-xs text-on-surface-variant bg-white border-t border-outline">
+    © 2026 etgosu · 키즈 카메라 &nbsp;|&nbsp; 문의: etgosu@gmail.com
+  </footer>
+
+</body>
+</html>

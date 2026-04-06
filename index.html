@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="내 옷장과 날씨 데이터를 바탕으로 AI가 오늘의 코디를 추천해주는 패션 앱, Blue Wind." />
-  <title>Blue Wind — AI 옷장 & 날씨 코디 추천 앱</title>
+  <meta name="description" content="Blue Wind — 일상의 불편함을 해결하는 모바일 앱을 만듭니다. AI.StyleMate, 우리강아지 등 iOS·Android 앱을 개발합니다." />
+  <title>Blue Wind — 모바일 앱 개발</title>
 
   <style>
     :root{
@@ -36,8 +36,10 @@
         var(--bg);
       line-height:1.6;
     }
-    a{color:inherit}
+    a{color:inherit; text-decoration:none;}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
+
+    /* Nav */
     .nav{
       position:sticky; top:0; z-index:10;
       backdrop-filter:saturate(1.4) blur(10px);
@@ -49,14 +51,14 @@
       padding:12px 0;
     }
     .brand{
-      display:flex; align-items:center; gap:10px; text-decoration:none;
+      display:flex; align-items:center; gap:10px;
       font-weight:800; letter-spacing:.2px;
     }
     .logo{
       width:34px; height:34px; border-radius:12px;
       background: linear-gradient(135deg, var(--brand), var(--brand2));
       box-shadow: 0 10px 24px rgba(124,92,255,.25);
-      position:relative;
+      position:relative; flex-shrink:0;
     }
     .logo:after{
       content:"";
@@ -67,34 +69,19 @@
     }
     .nav-links{
       display:flex; gap:14px; align-items:center;
-      color:var(--muted);
-      font-weight:600;
+      color:var(--muted); font-weight:600;
     }
     .nav-links a{
-      text-decoration:none;
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid transparent;
+      padding:8px 10px; border-radius:12px; border:1px solid transparent;
     }
-    .nav-links a:hover{
-      color:var(--text);
-      border-color: var(--line);
-      background: rgba(255,255,255,.04);
-    }
+    .nav-links a:hover{color:var(--text); border-color: var(--line); background: rgba(255,255,255,.04);}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color:var(--text);
-      font-weight:800;
-      text-decoration:none;
-      gap:10px;
-      cursor:pointer;
+      padding:10px 16px; border-radius:14px;
+      border:1px solid var(--line); background: rgba(255,255,255,.04);
+      color:var(--text); font-weight:700; gap:8px; cursor:pointer;
       transition: transform .08s ease, background .2s ease, border-color .2s ease;
-      user-select:none;
-      white-space:nowrap;
+      white-space:nowrap; font-size:14px;
     }
     .btn:hover{background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18);}
     .btn:active{transform: translateY(1px);}
@@ -103,198 +90,132 @@
       background: linear-gradient(135deg, var(--brand), var(--brand2));
       box-shadow: 0 18px 40px rgba(124,92,255,.25);
     }
-    .btn.primary:hover{filter: brightness(1.04);}
-    .hero{
-      padding:46px 0 26px;
+    .btn.primary:hover{filter: brightness(1.06);}
+
+    /* Hero */
+    .hero{padding:60px 0 36px;}
+    .hero-inner{
+      max-width:660px;
     }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    .card{
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border-radius: var(--radius2);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .hero-card{padding:26px;}
     .kicker{
       display:inline-flex; gap:8px; align-items:center;
-      padding:7px 12px; border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--muted);
-      font-weight:700;
-      font-size:13px;
+      padding:7px 14px; border-radius:999px;
+      border:1px solid var(--line); background: rgba(255,255,255,.04);
+      color: var(--muted); font-weight:700; font-size:13px; margin-bottom:20px;
     }
-    .dot{
-      width:8px; height:8px; border-radius:99px;
-      background: var(--ok);
-      box-shadow: 0 0 0 4px rgba(51,209,122,.12);
-    }
+    .dot{width:8px; height:8px; border-radius:99px; background: var(--ok); box-shadow: 0 0 0 4px rgba(51,209,122,.12);}
+    .dot-warn{width:8px; height:8px; border-radius:99px; background: var(--warn); box-shadow: 0 0 0 4px rgba(255,204,102,.12);}
     h1{
-      margin:14px 0 10px;
-      font-size: clamp(28px, 4vw, 44px);
-      line-height:1.15;
-      letter-spacing:-.5px;
+      margin:0 0 16px;
+      font-size: clamp(30px, 4.5vw, 52px);
+      line-height:1.12; letter-spacing:-.5px;
     }
-    .lead{
-      margin:0;
-      color: var(--muted);
-      font-size: 16px;
-      max-width: 62ch;
-    }
-    .cta{
+    .lead{margin:0 0 28px; color: var(--muted); font-size:17px; max-width:54ch; line-height:1.7;}
+    .cta{display:flex; gap:12px; flex-wrap:wrap;}
+
+    /* Stats row */
+    .stats{
       display:flex; gap:12px; flex-wrap:wrap;
-      margin-top:18px;
-    }
-    .mini{
-      padding:20px;
-      background: linear-gradient(180deg, rgba(17,26,51,.7), rgba(15,23,48,.65));
+      margin-top:48px; padding-top:32px;
       border-top:1px solid var(--line);
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
     }
-    .pill{
-      padding:12px 12px;
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+    .stat{
+      flex:1; min-width:140px;
+      padding:16px 18px; border-radius:var(--radius2);
+      border:1px solid var(--line); background: rgba(255,255,255,.03);
     }
-    .pill b{display:block; margin-bottom:4px;}
-    .pill span{color:var(--muted); font-size:13px;}
-    .side{
-      padding:22px;
-      display:flex; flex-direction:column; gap:12px;
-    }
-    .side .metric{
-      border:1px solid var(--line);
-      border-radius: var(--radius2);
-      padding:16px;
-      background: rgba(255,255,255,.03);
-    }
-    .metric .label{color:var(--muted); font-weight:700; font-size:13px;}
-    .metric .value{font-size:22px; font-weight:900; margin-top:6px;}
-    .metric .desc{color:var(--muted); font-size:13px; margin-top:6px;}
-    section{padding:18px 0;}
+    .stat-val{font-size:22px; font-weight:900; margin-bottom:4px;}
+    .stat-label{font-size:13px; color:var(--muted);}
+
+    /* Apps section */
+    section{padding:24px 0;}
     .section-title{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:14px;
-      margin:16px 0 12px;
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin:16px 0 20px;
     }
-    h2{
-      margin:0;
-      font-size: 20px;
-      letter-spacing:-.2px;
-    }
+    h2{margin:0; font-size:20px; letter-spacing:-.2px;}
     .hint{margin:0; color:var(--muted); font-size:13px;}
-    .grid3{
+
+    .apps-grid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
+      grid-template-columns: repeat(2, 1fr);
+      gap:16px;
     }
-    .feature{
-      padding:16px;
-      border-radius: var(--radius2);
+    .app-card{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius:var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex; flex-direction:column;
     }
-    .feature .tag{
-      display:inline-flex;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-    .feature h3{margin:10px 0 6px; font-size:16px;}
-    .feature p{margin:0; color:var(--muted); font-size:13px;}
-    .split{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-    .list{
-      margin:0; padding-left:18px; color:var(--muted); font-size:13px;
-    }
-    .list li{margin:6px 0;}
-    .timeline .step{
-      padding:16px;
-      border-radius: var(--radius2);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      margin-bottom:10px;
-    }
-    .badge{
-      display:inline-flex;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      font-size:12px;
-      font-weight:900;
-      color: var(--text);
-    }
-    .step p{margin:8px 0 0; color:var(--muted); font-size:13px;}
-    /* 앱 흐름 */
-    .flow{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:12px;
-    }
-    .flow-step{
-      padding:18px 16px;
-      border-radius: var(--radius2);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      text-align:center;
-    }
-    .flow-num{
-      width:36px; height:36px; border-radius:50%;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
+    .app-card-body{padding:24px;}
+    .app-header{display:flex; align-items:flex-start; gap:14px; margin-bottom:14px;}
+    .app-icon{
+      width:56px; height:56px; border-radius:16px; flex-shrink:0;
       display:flex; align-items:center; justify-content:center;
-      font-weight:900; font-size:15px;
-      margin:0 auto 10px;
-      box-shadow: 0 8px 20px rgba(124,92,255,.3);
+      font-size:26px;
+      border:1px solid var(--line);
     }
-    .flow-step h3{margin:0 0 6px; font-size:14px;}
-    .flow-step p{margin:0; color:var(--muted); font-size:12px;}
-    footer{
-      padding:26px 0 46px;
+    .app-icon.stylemate{background: linear-gradient(135deg, rgba(124,92,255,.3), rgba(45,212,255,.2));}
+    .app-icon.baby{background: linear-gradient(135deg, rgba(255,152,0,.3), rgba(255,204,102,.2));}
+    .app-meta{flex:1;}
+    .app-name{font-size:18px; font-weight:800; margin:0 0 6px; letter-spacing:-.2px;}
+    .status-badge{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:4px 10px; border-radius:999px;
+      font-size:12px; font-weight:700;
+    }
+    .status-live{background: rgba(51,209,122,.12); color: var(--ok); border:1px solid rgba(51,209,122,.25);}
+    .status-soon{background: rgba(255,204,102,.1); color: var(--warn); border:1px solid rgba(255,204,102,.22);}
+    .app-desc{color:var(--muted); font-size:14px; line-height:1.7; margin:0 0 16px;}
+    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;}
+    .tag{
+      display:inline-flex; padding:5px 10px; border-radius:999px;
+      border:1px solid var(--line); background: rgba(255,255,255,.03);
+      color: var(--muted); font-size:11px; font-weight:800; letter-spacing:.3px;
+    }
+    .app-features{
+      margin:0; padding:0; list-style:none;
+      display:flex; flex-direction:column; gap:6px;
+    }
+    .app-features li{
+      font-size:13px; color:var(--muted); padding-left:14px; position:relative;
+    }
+    .app-features li::before{content:"·"; position:absolute; left:0; color:var(--brand2);}
+    .app-card-footer{
+      padding:16px 24px;
       border-top:1px solid var(--line);
-      margin-top:16px;
-      color: var(--muted);
-      font-size:13px;
-    }
-    .footer-row{
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-      align-items:center;
-    }
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      padding:4px 7px; border-radius:8px; border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color: var(--text);
-      font-size: 12px;
+      background: rgba(255,255,255,.02);
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:auto;
     }
 
-    @media (max-width: 900px){
-      .hero-grid{grid-template-columns:1fr}
-      .mini{grid-template-columns:1fr}
-      .grid3{grid-template-columns:1fr}
-      .split{grid-template-columns:1fr}
-      .flow{grid-template-columns:1fr 1fr}
-      .nav-links{display:none;}
+    /* Contact */
+    .contact-card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius:var(--radius2); padding:28px;
     }
-    @media (max-width: 500px){
-      .flow{grid-template-columns:1fr}
+    .contact-card p{color:var(--muted); font-size:14px; margin:0 0 18px;}
+
+    /* Footer */
+    footer{
+      padding:26px 0 46px; border-top:1px solid var(--line);
+      margin-top:16px; color:var(--muted); font-size:13px;
+    }
+    .footer-row{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center;}
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      padding:4px 7px; border-radius:8px; border:1px solid var(--line);
+      background: rgba(255,255,255,.03); color: var(--text); font-size:12px;
+    }
+
+    @media (max-width:760px){
+      .apps-grid{grid-template-columns:1fr;}
+      .nav-links{display:none;}
+      .stats{gap:8px;}
+      .stat{min-width:120px;}
     }
   </style>
 </head>
@@ -307,212 +228,139 @@
           <span class="logo" aria-hidden="true"></span>
           <span>Blue Wind</span>
         </a>
-
-        <div class="nav-links" aria-label="빠른 이동">
-          <a href="#product">기능</a>
-          <a href="#how">사용 흐름</a>
-          <a href="#roadmap">로드맵</a>
+        <div class="nav-links">
+          <a href="#apps">앱 소개</a>
+          <a href="#contact">문의</a>
         </div>
-
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a class="btn" href="#contact">문의</a>
-        </div>
+        <a class="btn" href="#contact">문의하기</a>
       </div>
     </div>
   </div>
 
   <main id="top">
     <div class="wrap">
+
+      <!-- Hero -->
       <div class="hero">
-        <div class="hero-grid">
-          <div class="card">
-            <div class="hero-card">
-              <div class="kicker"><span class="dot"></span> 출시 준비 중</div>
-              <h1>내 옷장 + 오늘 날씨로<br/>AI가 "지금 입기 좋은 코디"를 추천합니다.</h1>
-              <p class="lead">
-                Blue Wind는 <b>옷장 관리</b>와 <b>날씨 기반 코디 추천</b>을 한 번에 해결하는 패션 앱입니다.
-                사용자가 등록한 옷(소재·두께·색상 등)과 오늘의 날씨를 바탕으로, AI가 맥락 있는 코디를 제안하고
-                이미지로 착장 느낌까지 빠르게 확인할 수 있습니다.
-              </p>
-
-              <div class="cta">
-                <a class="btn primary" href="#product">기능 살펴보기</a>
-                <a class="btn" href="#how">사용 흐름 보기</a>
-                <a class="btn" href="#contact">문의하기</a>
-              </div>
-            </div>
-
-            <div class="mini">
-              <div class="pill">
-                <b>핵심 가치</b>
-                <span>"내 옷을 기준으로" 오늘의 선택을 쉽게</span>
-              </div>
-              <div class="pill">
-                <b>타깃 사용자</b>
-                <span>옷이 많은데 매일 뭐 입을지 고민하는 분</span>
-              </div>
-              <div class="pill">
-                <b>차별점</b>
-                <span>날씨 + 내 옷장 + AI 추천 + 시각 확인</span>
-              </div>
-              <div class="pill">
-                <b>원칙</b>
-                <span>개인정보 최소 수집 · 안전한 저장</span>
-              </div>
-            </div>
+        <div class="hero-inner">
+          <div class="kicker"><span class="dot"></span> 1인 개발자 · 앱 2개 운영 중</div>
+          <h1>작고 쓸모 있는<br/>앱을 만듭니다.</h1>
+          <p class="lead">
+            일상의 불편함을 해결하는 모바일 앱을 개발합니다.<br/>
+            iOS · Android, 패션부터 육아까지.
+          </p>
+          <div class="cta">
+            <a class="btn primary" href="#apps">앱 보러가기</a>
+            <a class="btn" href="#contact">협업 문의</a>
           </div>
+        </div>
 
-          <aside class="card side" aria-label="요약 카드">
-            <div class="metric">
-              <div class="label">제품 방향</div>
-              <div class="value">옷장 앱 + AI 코디</div>
-              <div class="desc">단순 추천이 아니라 "내 옷" 기준으로 현실적인 조합을 제안합니다.</div>
-            </div>
-            <div class="metric">
-              <div class="label">플랫폼</div>
-              <div class="value">iOS · Android</div>
-              <div class="desc">모바일 중심으로 빠르고 직관적인 UX를 제공합니다.</div>
-            </div>
-            <div class="metric">
-              <div class="label">운영 방식</div>
-              <div class="value">서버리스 중심</div>
-              <div class="desc">이미지 생성·합성 비용을 낮추는 구조를 꾸준히 개선합니다.</div>
-            </div>
-          </aside>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-val">2</div>
+            <div class="stat-label">운영 중인 앱</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">iOS · Android</div>
+            <div class="stat-label">지원 플랫폼</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">AI 기반</div>
+            <div class="stat-label">핵심 기술</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">최소 수집</div>
+            <div class="stat-label">개인정보 원칙</div>
+          </div>
         </div>
       </div>
 
-      <section id="product">
+      <!-- Apps -->
+      <section id="apps">
         <div class="section-title">
-          <h2>주요 기능</h2>
-          <p class="hint">MVP의 핵심 기능부터 단단하게 만들고 있습니다.</p>
+          <h2>앱 소개</h2>
+          <p class="hint">현재 운영 중인 앱들입니다.</p>
         </div>
 
-        <div class="grid3">
-          <div class="feature">
-            <span class="tag">WEATHER</span>
-            <h3>날씨 기반 추천</h3>
-            <p>기온·강수·체감 요소를 반영해 오늘 "현실적으로 입을 수 있는" 코디를 제안합니다.</p>
+        <div class="apps-grid">
+
+          <!-- AI.StyleMate -->
+          <div class="app-card">
+            <div class="app-card-body">
+              <div class="app-header">
+                <div class="app-icon stylemate">👔</div>
+                <div class="app-meta">
+                  <p class="app-name">AI.StyleMate</p>
+                  <span class="status-badge status-live"><span class="dot"></span> 프로덕션</span>
+                </div>
+              </div>
+              <p class="app-desc">
+                내 옷장과 오늘 날씨를 바탕으로 AI가 코디를 추천해 주는 패션 앱.
+                갖고 있는 옷을 등록하면 기온·강수·체감 요소를 반영해 현실적인 조합을 제안합니다.
+              </p>
+              <div class="tags">
+                <span class="tag">WEATHER</span>
+                <span class="tag">WARDROBE</span>
+                <span class="tag">AI</span>
+                <span class="tag">IMAGE</span>
+              </div>
+              <ul class="app-features">
+                <li>날씨 기반 코디 추천 (기온·강수·체감)</li>
+                <li>옷장 관리 — 소재·두께·색상 등록</li>
+                <li>AI 개인화 조합 & 이미지 시각화</li>
+                <li>추천 히스토리 저장</li>
+              </ul>
+            </div>
+            <div class="app-card-footer">
+              <a class="btn primary" href="mailto:stylemate.helpdesk@gmail.com">문의하기</a>
+            </div>
           </div>
-          <div class="feature">
-            <span class="tag">WARDROBE</span>
-            <h3>내 옷장 관리</h3>
-            <p>상의·하의·신발을 등록하고 소재·두께·색상·통기성 같은 특성을 기반으로 추천 정확도를 높입니다.</p>
+
+          <!-- 우리강아지 -->
+          <div class="app-card">
+            <div class="app-card-body">
+              <div class="app-header">
+                <div class="app-icon baby">🌡️</div>
+                <div class="app-meta">
+                  <p class="app-name">우리강아지</p>
+                  <span class="status-badge status-soon"><span class="dot-warn"></span> 출시 예정</span>
+                </div>
+              </div>
+              <p class="app-desc">
+                아이의 체온과 투약 기록을 간편하게 관리하는 육아 건강 앱.
+                음성 입력과 AI 도움말로 열이 날 때도 빠르고 정확하게 기록할 수 있습니다.
+              </p>
+              <div class="tags">
+                <span class="tag">TEMP</span>
+                <span class="tag">MED</span>
+                <span class="tag">AI</span>
+                <span class="tag">HISTORY</span>
+                <span class="tag">VOICE</span>
+              </div>
+              <ul class="app-features">
+                <li>체온 기록 & 타임라인 조회</li>
+                <li>해열제 투약 기록 및 간격 알림</li>
+                <li>음성 입력 (STT) 지원</li>
+                <li>AI 기반 상황 안내</li>
+              </ul>
+            </div>
+            <div class="app-card-footer">
+              <a class="btn" href="mailto:etgosu@gmail.com">출시 소식 받기</a>
+            </div>
           </div>
-          <div class="feature">
-            <span class="tag">AI</span>
-            <h3>개인화 코디</h3>
-            <p>취향과 상황(출근·주말·데이트 등)을 반영해 맥락 있는 코디 조합을 제안합니다.</p>
-          </div>
-          <div class="feature">
-            <span class="tag">IMAGE</span>
-            <h3>코디 시각화</h3>
-            <p>코디를 입었을 때의 느낌을 이미지 합성·생성으로 빠르게 확인할 수 있습니다.</p>
-          </div>
-          <div class="feature">
-            <span class="tag">HISTORY</span>
-            <h3>추천 히스토리</h3>
-            <p>지난 코디 추천을 저장·기록해 자신의 스타일 패턴을 파악하고 활용할 수 있습니다.</p>
-          </div>
-          <div class="feature">
-            <span class="tag">UX</span>
-            <h3>직관적인 인터페이스</h3>
-            <p>모바일 중심으로 빠른 흐름: "옷 선택 → 추천 확인 → 저장/공유"까지 자연스럽게.</p>
-          </div>
+
         </div>
       </section>
 
-      <section id="how">
-        <div class="section-title">
-          <h2>사용 흐름</h2>
-          <p class="hint">4단계로 오늘의 코디를 완성하세요.</p>
-        </div>
-
-        <div class="flow">
-          <div class="flow-step">
-            <div class="flow-num">1</div>
-            <h3>옷 등록</h3>
-            <p>갖고 있는 옷을 소재·색상·두께별로 등록해 내 옷장을 구성합니다.</p>
-          </div>
-          <div class="flow-step">
-            <div class="flow-num">2</div>
-            <h3>날씨 확인</h3>
-            <p>앱이 현재 위치의 날씨를 자동으로 가져와 오늘의 기온·강수 등을 분석합니다.</p>
-          </div>
-          <div class="flow-step">
-            <div class="flow-num">3</div>
-            <h3>AI 코디 추천</h3>
-            <p>날씨와 내 옷장 데이터를 바탕으로 AI가 상황에 맞는 코디 조합을 제안합니다.</p>
-          </div>
-          <div class="flow-step">
-            <div class="flow-num">4</div>
-            <h3>확인 & 저장</h3>
-            <p>이미지로 착장을 확인하고 마음에 드는 코디를 저장하거나 공유합니다.</p>
-          </div>
-        </div>
-      </section>
-
-
-      <section id="roadmap" class="timeline">
-        <div class="section-title">
-          <h2>로드맵</h2>
-          <p class="hint">가볍게 시작해 유저 피드백으로 빠르게 개선합니다.</p>
-        </div>
-
-        <div class="step">
-          <span class="badge">Phase 1 · MVP</span>
-          <p>옷장 등록 → 날씨 기반 코디 추천 → 추천 저장·히스토리 → 기본 UI/UX 안정화</p>
-        </div>
-        <div class="step">
-          <span class="badge">Phase 2 · 개인화</span>
-          <p>취향·상황 반영, 코디 조합 다양화, 필터·정렬 고도화, "왜 이 조합인지" 설명 강화</p>
-        </div>
-        <div class="step">
-          <span class="badge">Phase 3 · 시각화</span>
-          <p>이미지 합성·생성 기능 제공, 비용 최적화(캐시·모델·빈도 제어) 적용, 코디 공유 기능</p>
-        </div>
-      </section>
-
-      <section id="trust">
-        <div class="section-title">
-          <h2>보안 · 프라이버시</h2>
-          <p class="hint">개인 데이터는 최소 수집 + 안전한 저장을 기본으로 합니다.</p>
-        </div>
-
-        <div class="split">
-          <div class="feature">
-            <span class="tag">PRIVACY</span>
-            <h3>최소 수집 원칙</h3>
-            <ul class="list">
-              <li>추천 품질에 필요한 데이터만 수집</li>
-              <li>민감정보는 기본적으로 수집하지 않음</li>
-              <li>사용자 데이터 삭제 요청 즉시 처리</li>
-            </ul>
-          </div>
-          <div class="feature">
-            <span class="tag">SECURITY</span>
-            <h3>안전한 접근 제어</h3>
-            <ul class="list">
-              <li>토큰 기반 인증 + RLS 정책으로 사용자별 데이터 분리</li>
-              <li>비밀키·관리자 키는 클라이언트에 포함하지 않음</li>
-              <li>전송 구간 암호화(HTTPS) 적용</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
+      <!-- Contact -->
       <section id="contact">
         <div class="section-title">
           <h2>문의</h2>
-
         </div>
-
-        <div class="feature">
-          <p style="margin:0 0 12px; color:var(--muted); font-size:13px;">
-            앱 출시 소식, 베타 테스트 참여, 비즈니스 협업 등 무엇이든 문의해 주세요.
-          </p>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn primary" href="mailto:stylemate.helpdesk@gmail.com">이메일로 문의하기</a>
+        <div class="contact-card">
+          <p>앱 출시 소식, 베타 테스트 참여, 비즈니스 협업 등 무엇이든 편하게 연락해 주세요.</p>
+          <div class="cta">
+            <a class="btn primary" href="mailto:etgosu@gmail.com">이메일로 문의하기</a>
             <a class="btn" href="#top">위로</a>
           </div>
         </div>
@@ -520,14 +368,15 @@
 
       <footer>
         <div class="footer-row">
-          <div>© <span id="year"></span> Blue Wind. All rights reserved.</div>
+          <div>© <span id="year"></span> Blue Wind (etgosu). All rights reserved.</div>
           <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-            <span class="kbd">패션 앱</span>
+            <span class="kbd">iOS · Android</span>
             <span style="opacity:.6;">·</span>
-            <span class="kbd">AI 코디 추천</span>
+            <span class="kbd">앱 2개</span>
           </div>
         </div>
       </footer>
+
     </div>
   </main>
 
