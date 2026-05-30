@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>제주 가족여행 가이드 · 6/12–6/15</title>
+<style>
+  :root{
+    --bg:#0e1822; --bg2:#13202c; --paper:#f7f3ea; --ink:#1a2129; --muted:#5b6b78;
+    --sea:#0e9bb8; --sea-deep:#0b6f86; --coral:#ff6f5e; --sun:#ffb22e; --green:#1f9d6b;
+    --line:#e3dccd; --go:#159d63; --maybe:#e08a16; --skip:#d6483f;
+    --serif:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","맑은 고딕",sans-serif;
+    --head:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:var(--serif);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .page{max-width:860px;margin:0 auto;background:var(--paper);}
+
+  .hero{position:relative;color:#fff;overflow:hidden;background:linear-gradient(160deg,#0b6f86 0%,#0e9bb8 55%,#13b0c4 100%);padding:38px 26px 30px;}
+  .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 10%, rgba(255,255,255,.18), transparent 40%);}
+  .hero .wave{position:absolute;left:0;right:0;bottom:-1px;height:34px;display:block;}
+  .kick{font-weight:800;letter-spacing:2px;font-size:13px;opacity:.9;position:relative;}
+  .hero h1{font-family:var(--head);font-weight:800;font-size:clamp(28px,7vw,46px);line-height:1.05;margin:6px 0 14px;position:relative;text-shadow:0 2px 0 rgba(0,0,0,.12);}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;position:relative;}
+  .chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:5px 12px;border-radius:30px;font-size:13px;font-weight:700;}
+
+  section{padding:30px 22px;border-bottom:1px solid var(--line);}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:800;color:var(--sea-deep);font-size:13px;letter-spacing:1px;margin-bottom:6px;}
+  .eyebrow .bar{width:26px;height:3px;background:var(--coral);border-radius:3px;}
+  h2{font-family:var(--head);font-weight:800;font-size:clamp(21px,4.6vw,27px);color:var(--ink);margin-bottom:4px;}
+  .lead{color:var(--muted);font-size:15px;margin-bottom:18px;}
+
+  .tldr{background:linear-gradient(180deg,#fffdf7,#f3eddd);}
+  .tl-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+  .tl{background:#fff;border:1px solid var(--line);border-left:6px solid var(--sea);border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(13,40,55,.05);}
+  .tl.warn{border-left-color:var(--sun);}
+  .tl.alert{border-left-color:var(--skip);}
+  .tl b{font-weight:800;}
+  .tl .h{font-family:var(--head);font-weight:800;font-size:15px;margin-bottom:3px;display:flex;align-items:center;gap:8px;}
+  .emoji{font-size:18px;}
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;}
+  .lg{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;}
+  .pill{font-weight:800;font-size:12px;color:#fff;padding:3px 10px;border-radius:20px;white-space:nowrap;}
+  .pill.go{background:var(--go);} .pill.maybe{background:var(--maybe);} .pill.skip{background:var(--skip);}
+
+  .cards{display:grid;grid-template-columns:1fr;gap:14px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 22px rgba(13,40,55,.06);}
+  .card .top{display:flex;align-items:flex-start;gap:12px;padding:14px 16px 8px;}
+  .card .ttl{flex:1;}
+  .card .ttl h3{font-family:var(--head);font-weight:800;font-size:18px;line-height:1.2;}
+  .card .ttl .loc{font-size:12.5px;color:var(--muted);font-weight:700;}
+  .stars{font-size:13px;color:var(--sun);white-space:nowrap;font-weight:800;}
+  .stars small{color:var(--muted);}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 8px;}
+  .tag{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:20px;border:1px solid var(--line);background:#f8f5ee;color:#54616c;}
+  .tag.in{background:#e7f6fb;border-color:#bfe7f2;color:#0b6f86;}
+  .tag.out{background:#fef0ea;border-color:#f8d3c4;color:#c0573a;}
+  .tag.age{background:#eef7ee;border-color:#cce8cf;color:#1f7a4d;}
+  .card .body{padding:4px 16px 14px;font-size:14px;}
+  .card .price{display:flex;flex-wrap:wrap;gap:6px 14px;padding:10px 16px;background:#faf7f0;border-top:1px dashed var(--line);font-size:13px;}
+  .price .pk{font-weight:800;color:var(--sea-deep);}
+  .price .deal{color:var(--go);font-weight:800;}
+  .ribbon{font-weight:800;font-size:12px;color:#fff;padding:4px 10px;border-radius:0 0 12px 0;align-self:flex-start;}
+  .ribbon.go{background:var(--go);} .ribbon.maybe{background:var(--maybe);} .ribbon.skip{background:var(--skip);}
+
+  .weather{background:linear-gradient(160deg,#13202c,#1c3140);color:#dfe9ef;}
+  .weather h2{color:#fff;} .weather .lead{color:#9db4c1;}
+  .wbox{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 16px;}
+  @media(max-width:520px){.wbox{grid-template-columns:1fr;}}
+  .wstat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px;text-align:center;}
+  .wstat .n{font-family:var(--head);font-weight:800;font-size:24px;color:var(--sun);}
+  .wstat .l{font-size:12.5px;color:#9db4c1;font-weight:700;margin-top:2px;}
+  .wnote{background:rgba(255,178,46,.12);border:1px solid rgba(255,178,46,.35);border-radius:12px;padding:12px 14px;font-size:14px;color:#ffe6bd;}
+
+  .route{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:18px;box-shadow:0 8px 22px rgba(13,40,55,.06);}
+  .route .rhead{padding:14px 18px;color:#fff;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .route.east .rhead{background:linear-gradient(120deg,#1f9d6b,#15b07c);}
+  .route.west .rhead{background:linear-gradient(120deg,#ff6f5e,#ff9248);}
+  .route .rhead .rt{font-family:var(--head);font-weight:800;font-size:19px;}
+  .route .rhead .rb{font-weight:700;font-size:12.5px;background:rgba(0,0,0,.18);padding:4px 10px;border-radius:20px;margin-left:auto;}
+  .day{display:flex;gap:12px;padding:14px 18px;border-top:1px solid var(--line);}
+  .day:first-of-type{border-top:none;}
+  .dno{flex:0 0 auto;width:46px;text-align:center;}
+  .dno .d{font-family:var(--head);font-weight:800;font-size:20px;color:var(--ink);line-height:1;}
+  .dno .w{font-size:11px;color:var(--muted);font-weight:700;}
+  .dbody{flex:1;font-size:14px;}
+  .dbody .t{font-weight:800;color:var(--sea-deep);font-size:13px;}
+  .recommend{display:inline-block;background:#eef9f1;border:1px solid #cce8cf;color:#157a49;font-weight:700;font-size:13px;padding:8px 14px;border-radius:30px;margin-top:6px;}
+
+  .steps{counter-reset:s;display:grid;gap:12px;}
+  .step{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:0 6px 16px rgba(13,40,55,.05);}
+  .step:before{counter-increment:s;content:counter(s);flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--sea);color:#fff;font-family:var(--head);font-weight:800;display:grid;place-items:center;font-size:15px;}
+  .step .st{font-size:14px;} .step b{font-weight:800;color:var(--ink);}
+
+  .foot{padding:22px;text-align:center;color:var(--muted);font-size:12.5px;background:#f1ebdc;}
+  .foot b{color:#54616c;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="kick">제주 가족여행 · 3박 4일</div>
+    <h1>아이 둘 + 어른 셋,<br>제주에서 다 만족하기</h1>
+    <div class="meta">
+      <span class="chip">📅 6/12(금)~6/15(월)</span>
+      <span class="chip">👧 6세 · 4세</span>
+      <span class="chip">👨‍👩‍👦 부모2 + 외삼촌</span>
+      <span class="chip">🏨 1박 해군호텔(제주시 북부)</span>
+      <span class="chip">💸 입장료 ~2만원/인</span>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0 20 Q 180 0 360 20 T 720 20 T 1080 20 T 1440 20 V40 H0Z" fill="#f7f3ea"/></svg>
+  </header>
+
+  <section class="tldr">
+    <span class="eyebrow"><span class="bar"></span>한눈에</span>
+    <h2>결론 먼저</h2>
+    <p class="lead">쿠폰팩은 참고만. 후기·가성비·날씨로 거른 핵심만 추렸어요.</p>
+    <div class="tl-grid">
+      <div class="tl">
+        <div class="h"><span class="emoji">⭐</span>강추 5곳</div>
+        <b>아쿠아플라넷</b>(우천 최강) · <b>스누피가든</b> · <b>에코랜드</b> · <b>카멜리아 힐</b> · <b>미디어아트</b>(노형수퍼마켙/아르떼 중 1). 아이·어른 모두 만족 + 실내외 균형.
+      </div>
+      <div class="tl alert">
+        <div class="h"><span class="emoji">🚫</span>4세 동반이면 사실상 패스</div>
+        <b>9.81파크 카트</b>(동승 만6세·키 120cm↑ → 4세 불가) · <b>우도 잠수함</b> · <b>마라도 여객선</b> · <b>제주제트</b>. 멀미·신장·연령 제약이 큼.
+      </div>
+      <div class="tl warn">
+        <div class="h"><span class="emoji">🌧️</span>장마 주의</div>
+        평년 장마 시작은 <b>6/19</b>지만 <b>2025년은 6/12</b>에 시작(이른 편). 여행 기간과 겹칠 수 있어 <b>실내 카드 2~3개</b> 필수.
+      </div>
+      <div class="tl" style="border-left-color:var(--green)">
+        <div class="h"><span class="emoji">🧭</span>추천 루트</div>
+        날씨 리스크 분산 + 아쿠아플라넷 카드 때문에 <b>동부 루트(성산·구좌 숙소)</b>를 우선 추천.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow"><span class="bar"></span>장소별 평가</span>
+    <h2>갈 만한 곳 · 패스할 곳</h2>
+    <p class="lead">평점은 OTA·후기 종합 체감치예요. 가격은 2026년 기준, 변동 가능.</p>
+
+    <div class="legend">
+      <span class="lg"><span class="pill go">강추</span></span>
+      <span class="lg"><span class="pill maybe">선택</span></span>
+      <span class="lg"><span class="pill skip">패스</span></span>
+      <span class="lg"><span class="tag in">실내</span> 비와도 OK</span>
+      <span class="lg"><span class="tag out">실외</span> 맑은 날</span>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <span class="ribbon go">강추</span>
+        <div class="top">
+          <div class="ttl"><h3>아쿠아플라넷 제주</h3><span class="loc">📍 성산 · 동부</span></div>
+          <span class="stars">★★★★½ <small>4.5</small></span>
+        </div>
+        <div class="tags"><span class="tag in">실내</span><span class="tag age">전 연령</span><span class="tag">3~5시간</span><span class="tag">공연有</span></div>
+        <div class="body">국내 최대 수족관. <b>비 올 때 최고의 카드.</b> 오션아레나 공연 시간 맞춰 입장 추천. 섭지코지·성산일출봉과 도보권이라 동선 효율 최고.</div>
+        <div class="price"><span><span class="pk">정가</span> 성인 45,500 · 소인 41,400</span><span class="deal">→ 온라인 34,900~39,700</span></div>
+      </div>
+
+      <div class="card">
+        <span class="ribbon go">강추</span>
+        <div class="top">
+          <div class="ttl"><h3>스누피가든</h3><span class="loc">📍 구좌 · 동부</span></div>
+          <span class="stars">★★★★½ <small>4.6</small></span>
+        </div>
+        <div class="tags"><span class="tag in">실내+</span><span class="tag out">실외</span><span class="tag age">36개월~</span><span class="tag">2~3시간</span></div>
+        <div class="body">실내 가든하우스 + 넓은 야외 정원. <b>어른 힐링 + 아이 포토존</b> 동시 충족. 어느 정도 비가 와도 즐길 만하다는 후기 다수. 36개월 미만 무료.</div>
+        <div class="price"><span><span class="pk">정가</span> 성인 19,000 · 청소년 16,000 · 어린이 13,000</span></div>
+      </div>
+
+      <div class="card">
+        <span class="ribbon go">강추</span>
+        <div class="top">
+          <div class="ttl"><h3>에코랜드 테마파크</h3><span class="loc">📍 조천 · 동부</span></div>
+          <span class="stars">★★★★ <small>4.3</small></span>
+        </div>
+        <div class="tags"><span class="tag out">실외</span><span class="tag age">36개월 무료</span><span class="tag">2시간</span><span class="tag">🚂 기차</span></div>
+        <div class="body">증기기관차로 곶자왈 4.5km를 도는 코스. 역마다 내려 구경 후 재탑승. <b>기차 좋아하는 4·6세에게 딱.</b></div>
+        <div class="price"><span><span class="pk">정가</span> 성인 16,000~18,000대 (현장/공식 확인)</span></div>
+      </div>
+
+      <div class="card">
+        <span class="ribbon go">강추</span>
+        <div class="top">
+          <div class="ttl"><h3>카멜리아 힐</h3><span class="loc">📍 안덕 · 서부</span></div>
+          <span class="stars">★★★★ <small>4.4</small></span>
+        </div>
+        <div class="tags"><span class="tag out">실외</span><span class="tag age">37개월~</span><span class="tag">40분~1.5시간</span><span class="tag">💰 가성비</span></div>
+        <div class="body">대형 정원, 산책·포토존 좋음. 단 <b>수국 절정은 6월 말~7월</b>이라 6월 중순은 개화 초입. 비 오면 약점.</div>
+        <div class="price"><span><span class="pk">정가</span> 성인 10,000 · 청소년 8,000 · 어린이 7,000</span></div>
+      </div>
+
+      <div class="card">
+        <span class="ribbon go">강추</span>
+        <div class="top">
+          <div class="ttl"><h3>미디어아트 (택1)</h3><span class="loc">📍 노형수퍼마켙(제주시) / 아르떼뮤지엄(애월)</span></div>
+          <span class="stars">★★★★ <small>4.3</small></span>
+        </div>
+        <div class="tags"><span class="tag in">실내</span><span class="tag age">전 연령</span><span class="tag">1~1.5시간</span><span class="tag">우천 대안</span></div>
+        <div class="body">몰입형 미디어아트. <b>비 오는 날 강력.</b> 동선상 가까운 한 곳만. 노형=인터랙티브 많음(유모차 제한) / 아르떼=규모 큼·카페 좋음.</div>
+        <div class="price"><span><span class="pk">정가</span> 약 1만원대 후반/인 (플랫폼 할인多)</span></div>
+      </div>
+
+      <div class="card">
+        <span class="ribbon maybe">선택</span>
+        <div class="top">
+          <div class="ttl"><h3>제주레일바이크</h3><span class="loc">📍 구좌 · 동부</span></div>
+          <span class="stars">★★★★ <small>4.2</small></span>
+        </div>
+        <div class="tags"><span class="tag in">지붕有</span><span class="tag age">36개월~</span><span class="tag">35분</span></div>
+        <div class="body">전동식이라 페달 없이 운행, 풍우막이 있어 <b>비 와도 탑승 가능.</b> 5명이면 2인승+3인승 조합.</div>
+        <div class="price"><span><span class="pk">현장</span> 2인승 30,000 · 4인승 48,000 (온라인↓)</span></div>
+      </div>
+
+      <div class="card">
+        <span class="ribbon maybe">선택</span>
+        <div class="top">
+          <div class="ttl"><h3>박물관은 살아있다 + 런닝맨</h3><span class="loc">📍 중문 · 같은 건물</span></div>
+          <span class="stars">★★★★ <small>4.1</small></span>
+        </div>
+        <div class="tags"><span class="tag in">실내</span><span class="tag age">6세◎ / 4세 동반</span><span class="tag">우천 대안</span></div>
+        <div class="body">착시·체험형이라 사진 재밌음. 런닝맨은 6세는 잘 즐기나 4세는 다소 벅참(부모 동반). <b>박물관은 5/28 휴관 종료 후 운영 — 출발 전 재확인.</b></div>
+        <div class="price"><span><span class="pk">런닝맨</span> 60분권 19,000 (온라인 16,200대)</span></div>
+      </div>
+
+      <div class="card">
+        <span class="ribbon maybe">선택</span>
+        <div class="top">
+          <div class="ttl"><h3>드르쿰다</h3><span class="loc">📍 표선 · 동부</span></div>
+          <span class="stars">★★★★ <small>4.2</small></span>
+        </div>
+        <div class="tags"><span class="tag out">실외</span><span class="tag age">먹이주기 전연령</span><span class="tag">입장 무료</span></div>
+        <div class="body">동물 먹이주기·이색자전거가 아이에게 좋음. <b>입장 무료.</b> 승마 36개월~ 단독 가능(카트는 키 150cm↑라 아이 불가). 비 오면 액티비티 제한.</div>
+        <div class="price"><span><span class="pk">입장</span> 무료 · 승마 1만원대~</span></div>
+      </div>
+
+      <div class="card">
+        <span class="ribbon maybe">선택</span>
+        <div class="top">
+          <div class="ttl"><h3>헬로키티아일랜드</h3><span class="loc">📍 안덕 · 서부</span></div>
+          <span class="stars">★★★★ <small>4.0</small></span>
+        </div>
+        <div class="tags"><span class="tag in">실내</span><span class="tag age">유아 여아◎</span><span class="tag">우천 대안</span></div>
+        <div class="body">실내 테마관. "4살이 너무 좋아했다"는 후기. 어린 여아 만족도 높음.</div>
+        <div class="price"><span><span class="pk">정가</span> 약 1만원대/인</span></div>
+      </div>
+
+      <div class="card">
+        <span class="ribbon skip">패스</span>
+        <div class="top">
+          <div class="ttl"><h3>9.81파크 카트</h3><span class="loc">📍 애월 · 서부</span></div>
+          <span class="stars">★★★★ <small>4.3</small></span>
+        </div>
+        <div class="tags"><span class="tag out">실외</span><span class="tag" style="background:#fdeaea;border-color:#f3c4c4;color:#c0392b;">4세 불가</span></div>
+        <div class="body">2인 동승 기준 <b>만 6세~13세 & 키 120cm 이상</b>. 4세 불가, 6세도 키 120cm 넘어야 가능. 원하면 <b>날씨 무관 실내게임 패키지만</b> 따로 이용 가능.</div>
+        <div class="price"><span><span class="pk">참고</span> 2026.02 일부 인상 — 공식앱 확인</span></div>
+      </div>
+
+      <div class="card">
+        <span class="ribbon skip">패스</span>
+        <div class="top">
+          <div class="ttl"><h3>우도 잠수함 · 마라도 · 제주제트</h3><span class="loc">📍 해상 레저</span></div>
+          <span class="stars">★★★★ <small>해상</small></span>
+        </div>
+        <div class="tags"><span class="tag out">해상</span><span class="tag" style="background:#fdeaea;border-color:#f3c4c4;color:#c0392b;">멀미·연령 부담</span></div>
+        <div class="body">전화 사전예약·출항시간 고정·멀미 위험. <b>4세 동반이면 생략 권장.</b> 제주제트는 물에 젖는 스릴형이라 어린아이 부적합.</div>
+        <div class="price"><span><span class="pk">우도잠수함</span> 성인 55,000 · 소인 36,000 (현장 해상공원료 별도)</span></div>
+      </div>
+
+      <div class="card">
+        <span class="ribbon skip">패스</span>
+        <div class="top">
+          <div class="ttl"><h3>본태박물관 · 수풍석뮤지엄</h3><span class="loc">📍 서부</span></div>
+          <span class="stars">★★★★ <small>예술</small></span>
+        </div>
+        <div class="tags"><span class="tag in">실내</span><span class="tag" style="background:#fdeaea;border-color:#f3c4c4;color:#c0392b;">아이 흥미 낮음</span></div>
+        <div class="body">건축·예술 중심이라 어린아이 흥미 낮음. 수풍석은 사전예약·셔틀제라 가족 자유관람에 부적합.</div>
+        <div class="price"><span><span class="pk">—</span> 어른 취향이면 별도 고려</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="weather">
+    <span class="eyebrow" style="color:#7fd4e6"><span class="bar"></span>6월 중순 날씨</span>
+    <h2>장마와 겹칠 수 있어요</h2>
+    <p class="lead">그래서 실내 카드 확보가 핵심입니다.</p>
+    <div class="wbox">
+      <div class="wstat"><div class="n">6/19</div><div class="l">평년 장마 시작일</div></div>
+      <div class="wstat"><div class="n">6/12</div><div class="l">2025년 실제 시작(이른 편)</div></div>
+      <div class="wstat"><div class="n">~348mm</div><div class="l">장마철 평균 강수량</div></div>
+    </div>
+    <div class="wnote">☔ <b>대비책</b> — 출발 3~4일 전 강수확률 확인. <b>60%↑</b>면 아쿠아플라넷+미디어아트+런닝맨/박물관 위주로, <b>30%↓</b>면 카멜리아힐·섭지코지·해변 등 실외 비중 유지.</div>
+  </section>
+
+  <section>
+    <span class="eyebrow"><span class="bar"></span>추천 동선</span>
+    <h2>한 방향 루프 2가지</h2>
+    <p class="lead">첫날 숙소가 제주시 북부라, 둘째 날부터 되돌아가지 않게 짰어요.</p>
+
+    <div class="route east">
+      <div class="rhead"><span class="rt">🌿 동부 루트</span><span class="rb">우천에 강함 · 추천</span></div>
+      <div class="day"><div class="dno"><div class="d">1</div><div class="w">금</div></div><div class="dbody"><span class="t">저녁 도착</span><br>공항 → 해군호텔(해안동) 체크인 → 제주시 저녁(올래국수 등) → 휴식</div></div>
+      <div class="day"><div class="dno"><div class="d">2</div><div class="w">토</div></div><div class="dbody"><span class="t">조천·구좌</span><br>오전 에코랜드 → 점심 가시아방국수 → 오후 스누피가든 → 성산/구좌 숙소 → 저녁 제주뚝배기</div></div>
+      <div class="day"><div class="dno"><div class="d">3</div><div class="w">일</div></div><div class="dbody"><span class="t">성산</span><br>오전 아쿠아플라넷(공연시간 맞춰, 비와도 OK) → 섭지코지 산책 → 오후 레일바이크 or 우천 시 휴식</div></div>
+      <div class="day"><div class="dno"><div class="d">4</div><div class="w">월</div></div><div class="dbody"><span class="t">마무리</span><br>성산 출발 → 함덕해변·카페 → 렌터카 반납(14시 전후) → 공항 16:00</div></div>
+    </div>
+
+    <div class="route west">
+      <div class="rhead"><span class="rt">🎨 서부 루트</span><span class="rb">이동 짧음 · 예술·꽃</span></div>
+      <div class="day"><div class="dno"><div class="d">1</div><div class="w">금</div></div><div class="dbody"><span class="t">저녁 도착</span><br>공항 → 해군호텔 → 제주시 저녁</div></div>
+      <div class="day"><div class="dno"><div class="d">2</div><div class="w">토</div></div><div class="dbody"><span class="t">애월·안덕</span><br>오전 아르떼뮤지엄 → 점심 금돈가/한림정육식당 → 오후 카멜리아 힐 → 중문/애월 숙소</div></div>
+      <div class="day"><div class="dno"><div class="d">3</div><div class="w">일</div></div><div class="dbody"><span class="t">중문</span><br>오전 박물관은 살아있다+런닝맨(우천 대안) → 점심 중문생선구이 → 오후 헬로키티 or 맑으면 중문색달해변</div></div>
+      <div class="day"><div class="dno"><div class="d">4</div><div class="w">월</div></div><div class="dbody"><span class="t">마무리</span><br>중문 출발 → (노형수퍼마켙 미디어아트 추가 가능) → 공항 16:00</div></div>
+    </div>
+
+    <div class="recommend">👉 추천: <b>동부 루트</b> — 아쿠아플라넷이라는 압도적 우천 카드 + 에코랜드·스누피가든 조합으로 가장 안정적.</div>
+  </section>
+
+  <section style="background:#faf7f0;">
+    <span class="eyebrow"><span class="bar"></span>다음 할 일</span>
+    <h2>지금부터 체크리스트</h2>
+    <div class="steps">
+      <div class="step"><div class="st"><b>티켓 가격 비교 후 더 싼 쪽만</b> — 아쿠아플라넷·스누피가든은 온라인 20~40% 할인. 보유 쿠폰팩(20~30%)과 비교해 싼 쪽 선택. 쿠폰 다 쓸 필요 없음.</div></div>
+      <div class="step"><div class="st"><b>2·3박 숙소 1주 내 확정</b> — 선택 루트 권역으로(동부=성산/구좌, 서부=중문/애월).</div></div>
+      <div class="step"><div class="st"><b>출발 3~4일 전 날씨 트리거</b> — 강수확률에 따라 실내/실외 순서 유연 조정.</div></div>
+      <div class="step"><div class="st"><b>연령 제한 재확인</b> — 6세 키 120cm 넘으면 9.81파크 2인 레이싱 재검토. 박물관은 살아있다 운영 여부 확인.</div></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    가격·운영시간·휴무·공연시간·개화 시기는 변동이 잦으니 방문 전 공식 채널에서 재확인하세요.<br>
+    <b>출처</b>: 트립닷컴 · NOL/야놀자 · 마이리얼트립 · Klook · VisitJeju · 마라도여객선 · 우도잠수함 공식 · 기상청 평년값 등 종합.
+  </div>
+
+</div>
+</body>
+</html>
