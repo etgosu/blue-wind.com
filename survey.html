@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>제주여행 가족 설문</title>
+<style>
+  :root{
+    --bg:#0e1822; --paper:#f7f3ea; --ink:#1a2129; --muted:#5b6b78;
+    --sea:#0e9bb8; --sea-deep:#0b6f86; --coral:#ff6f5e; --sun:#ffb22e;
+    --green:#1f9d6b; --line:#e3dccd;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.55;}
+  .page{max-width:600px;margin:0 auto;background:var(--paper);min-height:100vh;}
+
+  header{background:linear-gradient(155deg,#0b6f86,#0e9bb8 60%,#13b0c4);color:#fff;padding:30px 22px 26px;position:relative;overflow:hidden;}
+  header:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 0%,rgba(255,255,255,.2),transparent 45%);}
+  header .k{font-size:13px;letter-spacing:2px;opacity:.92;font-weight:700;position:relative;}
+  header h1{font-size:25px;font-weight:800;margin:6px 0 10px;position:relative;line-height:1.2;}
+  header p{font-size:14px;opacity:.95;position:relative;}
+
+  .who{background:#fff;border-bottom:1px solid var(--line);padding:16px 22px;}
+  .who .lbl{font-size:13px;font-weight:700;color:var(--sea-deep);margin-bottom:8px;}
+  .who .row{display:flex;gap:8px;flex-wrap:wrap;}
+  .who button{flex:1;min-width:72px;padding:11px 6px;border:2px solid var(--line);background:#faf7f0;border-radius:12px;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;transition:.15s;}
+  .who button.on{border-color:var(--sea);background:var(--sea);color:#fff;}
+
+  .progress{height:5px;background:var(--line);}
+  .progress .bar{height:100%;width:0;background:var(--coral);transition:width .3s;}
+
+  main{padding:18px 18px 30px;}
+  .q{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 6px 16px rgba(13,40,55,.05);}
+  .q .qn{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--sea-deep);padding:3px 10px;border-radius:20px;margin-bottom:9px;}
+  .q h2{font-size:17px;font-weight:800;margin-bottom:3px;}
+  .q .sub{font-size:13px;color:var(--muted);margin-bottom:13px;}
+  .opts{display:grid;gap:9px;}
+  .opt{display:flex;align-items:center;gap:11px;border:2px solid var(--line);border-radius:12px;padding:12px 13px;cursor:pointer;transition:.15s;background:#fff;}
+  .opt:active{transform:scale(.99);}
+  .opt.sel{border-color:var(--sea);background:#eaf7fb;}
+  .opt .mk{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:13px;color:#fff;}
+  .opt.sel .mk{background:var(--sea);border-color:var(--sea);}
+  .opt .ot{flex:1;font-size:14.5px;font-weight:600;}
+  .opt .od{font-size:12.5px;color:var(--muted);font-weight:400;margin-top:1px;}
+
+  .note{font-size:13px;color:var(--muted);background:#fff8e8;border:1px solid #f4e2b8;border-radius:12px;padding:12px 14px;margin-bottom:14px;}
+  .note b{color:#a9760a;}
+
+  .actions{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(247,243,234,0),var(--paper) 30%);padding:14px 0 4px;}
+  .btn{width:100%;padding:15px;border:none;border-radius:14px;font-size:16px;font-weight:800;color:#fff;background:var(--coral);cursor:pointer;box-shadow:0 8px 20px rgba(255,111,94,.35);}
+  .btn:disabled{background:#c9c2b4;box-shadow:none;}
+  .btn.ghost{background:#fff;color:var(--sea-deep);border:2px solid var(--line);box-shadow:none;margin-top:8px;}
+
+  .result{display:none;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:6px;}
+  .result.show{display:block;}
+  .result h3{font-size:17px;font-weight:800;margin-bottom:8px;}
+  .result textarea{width:100%;min-height:190px;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px;font-family:inherit;color:var(--ink);resize:vertical;background:#faf7f0;}
+  .result .copy{margin-top:10px;}
+
+  footer{padding:18px 22px 30px;text-align:center;font-size:12px;color:var(--muted);}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="k">제주 가족여행 · 6/12–6/15</div>
+    <h1>어른들 의견 모아요 🗳️</h1>
+    <p>아이 둘(6·4세) 데리고 가는 여행, 핵심만 함께 정해요. 1분이면 끝!</p>
+  </header>
+
+  <div class="who">
+    <div class="lbl">누구신가요?</div>
+    <div class="row" id="whoRow">
+      <button data-who="아빠">아빠</button>
+      <button data-who="엄마">엄마</button>
+      <button data-who="외삼촌">외삼촌</button>
+    </div>
+  </div>
+
+  <div class="progress"><div class="bar" id="bar"></div></div>
+
+  <main>
+    <div class="note">💡 정답은 없어요. <b>각자 끌리는 쪽</b>을 골라주세요. 다 고르면 결과 요약이 나오고, <b>복사해서 단톡방에 붙여넣기</b>하면 됩니다.</div>
+
+    <div id="form"></div>
+
+    <div class="actions" id="actions">
+      <button class="btn" id="submit" disabled>결과 요약 만들기</button>
+      <button class="btn ghost" id="reset">내 응답 다시하기</button>
+    </div>
+
+    <div class="result" id="result">
+      <h3>📋 내 응답 요약</h3>
+      <textarea id="summary" readonly></textarea>
+      <button class="btn copy" id="copy">📲 복사해서 단톡방에 붙여넣기</button>
+    </div>
+  </main>
+
+  <footer>합의가 필요한 9가지 · 각자 응답 후 단톡방에 공유하세요</footer>
+</div>
+
+<script>
+const QUESTIONS = [
+  { id:"route", n:"핵심", t:"동선, 어느 쪽으로?", s:"가장 중요한 결정. 첫날은 제주시 북부(해군호텔) 고정.",
+    o:[
+      {v:"동부 루트", t:"🌿 동부 루트 (추천)", d:"성산·구좌 숙소 / 아쿠아플라넷·에코랜드·스누피가든 / 비에 강함"},
+      {v:"서부 루트", t:"🎨 서부 루트", d:"중문·애월 숙소 / 미디어아트·카멜리아힐 / 이동 짧음"},
+      {v:"다수결 따름", t:"🤷 다수결 따를게요", d:""},
+    ]},
+  { id:"pace", n:"속도", t:"하루 일정 강도는?", s:"4세 체력이 변수예요.",
+    o:[
+      {v:"여유롭게", t:"🐢 여유롭게", d:"하루 1~2곳 + 낮잠/휴식 충분히"},
+      {v:"적당히", t:"🚶 적당히", d:"오전 1곳 + 오후 1곳"},
+      {v:"알차게", t:"🏃 알차게", d:"많이 보고 많이 다니기"},
+    ]},
+  { id:"budget", n:"예산", t:"입장료·체험 씀씀이는?", s:"1인 기준 감각.",
+    o:[
+      {v:"가성비 위주", t:"💰 가성비 위주", d:"무료·저렴한 곳 위주, 1만원 안팎"},
+      {v:"적당히 2만원", t:"💵 적당히", d:"2만원 안팎이면 OK"},
+      {v:"좋으면 쓰자", t:"💳 좋으면 쓰자", d:"만족도 높으면 금액 상관없이"},
+    ]},
+  { id:"rain", n:"날씨", t:"비 오면 어떻게?", s:"6월 중순, 장마와 겹칠 수 있어요.",
+    o:[
+      {v:"실내로 전환", t:"☔ 실내로 싹 전환", d:"수족관·미디어아트 등으로 변경"},
+      {v:"우산 쓰고 강행", t:"🌂 우산 쓰고 강행", d:"웬만하면 원래 계획대로"},
+      {v:"숙소 휴식", t:"🏨 숙소에서 쉬자", d:"비 심하면 그냥 쉬기"},
+    ]},
+  { id:"activity", n:"체험", t:"돈 더 내도 할 액티비티는?", s:"가장 끌리는 1순위.",
+    o:[
+      {v:"아쿠아플라넷", t:"🐠 아쿠아플라넷", d:"실내 대형 수족관 (비에 강함)"},
+      {v:"에코랜드 기차", t:"🚂 에코랜드 기차", d:"숲속 증기기관차"},
+      {v:"동물·승마", t:"🐴 동물·승마 체험", d:"드르쿰다 먹이주기·승마"},
+      {v:"스누피가든/정원", t:"🌸 스누피가든/정원", d:"포토존·산책 위주"},
+    ]},
+  { id:"dinner", n:"저녁", t:"저녁 식사 스타일은?", s:"아이 동반 외식.",
+    o:[
+      {v:"흑돼지·고기", t:"🥓 흑돼지·고기 위주", d:"넓은 고깃집"},
+      {v:"국·탕·뚝배기", t:"🍲 국·탕·뚝배기", d:"갈치조림·해물뚝배기 (아이 먹기 편함)"},
+      {v:"숙소 취사", t:"🍳 숙소에서 간단히", d:"장 봐서 해 먹기"},
+    ]},
+  { id:"kidfirst", n:"우선순위", t:"누구 만족이 1순위?", s:"솔직하게!",
+    o:[
+      {v:"철저히 아이 중심", t:"👶 철저히 아이 중심", d:"아이가 좋아하면 어른은 따라감"},
+      {v:"아이반 어른반", t:"⚖️ 아이 반 / 어른 반", d:"번갈아 만족"},
+      {v:"어른도 챙기자", t:"🍷 어른 즐길거리도 꼭", d:"카페·뷰·한잔 시간 확보"},
+    ]},
+  { id:"uncle", n:"외삼촌", t:"외삼촌 역할은?", s:"여행 만족도의 숨은 변수 😎",
+    o:[
+      {v:"육아 같이", t:"🤝 육아 같이 (운전·놀아주기)", d:"부모와 분담"},
+      {v:"자유시간 보장", t:"🎒 본인 자유시간도 보장", d:"따로 즐길 시간 주기"},
+      {v:"분담+저녁자유", t:"😎 분담하되 저녁은 자유", d:"낮엔 돕고 밤엔 한잔"},
+    ]},
+  { id:"book", n:"예약", t:"숙소·티켓 누가 예약?", s:"미루면 가격 올라요.",
+    o:[
+      {v:"내가 할게", t:"🙋 내가 할게", d:""},
+      {v:"같이 나눠서", t:"👥 같이 정하고 나눠서", d:""},
+      {v:"잘하는 사람 위임", t:"📲 잘하는 사람한테 위임", d:""},
+    ]},
+];
+
+let me = null;
+const form = document.getElementById('form');
+const answers = {};
+
+QUESTIONS.forEach(q=>{
+  const card = document.createElement('div');
+  card.className='q';
+  card.innerHTML = `<span class="qn">${q.n}</span><h2>${q.t}</h2><div class="sub">${q.s}</div>`;
+  const opts = document.createElement('div'); opts.className='opts';
+  q.o.forEach(o=>{
+    const el = document.createElement('div');
+    el.className='opt';
+    el.innerHTML=`<span class="mk">✓</span><div class="ot">${o.t}${o.d?`<div class="od">${o.d}</div>`:''}</div>`;
+    el.onclick=()=>{
+      opts.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));
+      el.classList.add('sel');
+      answers[q.id]={label:q.t, value:o.v};
+      updateProgress();
+    };
+    opts.appendChild(el);
+  });
+  card.appendChild(opts);
+  form.appendChild(card);
+});
+
+document.querySelectorAll('#whoRow button').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('#whoRow button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); me=b.dataset.who; updateProgress();
+  };
+});
+
+function updateProgress(){
+  const total = QUESTIONS.length + 1;
+  let filled = me?1:0;
+  QUESTIONS.forEach(q=>{ if(answers[q.id]) filled++; });
+  document.getElementById('bar').style.width = (filled/total*100)+'%';
+  document.getElementById('submit').disabled = !(me && QUESTIONS.every(q=>answers[q.id]));
+}
+
+document.getElementById('submit').onclick=()=>{
+  let txt = `[제주여행 설문] ${me}\n`;
+  QUESTIONS.forEach((q,i)=>{ txt += `${i+1}. ${q.t} → ${answers[q.id].value}\n`; });
+  document.getElementById('summary').value = txt.trim();
+  document.getElementById('result').classList.add('show');
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+};
+
+document.getElementById('copy').onclick=()=>{
+  const ta=document.getElementById('summary');
+  ta.select(); ta.setSelectionRange(0,99999);
+  navigator.clipboard?.writeText(ta.value).then(()=>{
+    document.getElementById('copy').textContent='복사됨 ✓ 단톡방에 붙여넣기';
+  }).catch(()=>{ document.execCommand('copy'); document.getElementById('copy').textContent='복사됨 ✓'; });
+};
+
+document.getElementById('reset').onclick=()=>{
+  Object.keys(answers).forEach(k=>delete answers[k]);
+  document.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));
+  document.getElementById('result').classList.remove('show');
+  updateProgress();
+};
+</script>
+</body>
+</html>
