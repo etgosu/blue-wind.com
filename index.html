@@ -1,387 +1,133 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Blue Wind — 일상의 불편함을 해결하는 모바일 앱을 만듭니다. AI.StyleMate, 36.5도 등 iOS·Android 앱을 개발합니다." />
-  <title>Blue Wind — 모바일 앱 개발</title>
-
-  <style>
-    :root{
-      --bg:#0b1020;
-      --panel:#111a33;
-      --panel2:#0f1730;
-      --text:#e9eeff;
-      --muted:#a8b3d6;
-      --line:rgba(255,255,255,.12);
-      --brand:#7c5cff;
-      --brand2:#2dd4ff;
-      --ok:#33d17a;
-      --warn:#ffcc66;
-      --shadow: 0 16px 40px rgba(0,0,0,.35);
-      --radius: 18px;
-      --radius2: 24px;
-      --max: 1080px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--text);
-      background:
-        radial-gradient(800px 400px at 15% 10%, rgba(124,92,255,.35), transparent 55%),
-        radial-gradient(700px 420px at 85% 15%, rgba(45,212,255,.25), transparent 55%),
-        radial-gradient(900px 520px at 50% 105%, rgba(51,209,122,.18), transparent 50%),
-        var(--bg);
-      line-height:1.6;
-    }
-    a{color:inherit; text-decoration:none;}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
-
-    /* Nav */
-    .nav{
-      position:sticky; top:0; z-index:10;
-      backdrop-filter:saturate(1.4) blur(10px);
-      background: linear-gradient(to bottom, rgba(11,16,32,.85), rgba(11,16,32,.55));
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-inner{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 0;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:800; letter-spacing:.2px;
-    }
-    .logo{
-      width:34px; height:34px; border-radius:12px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 10px 24px rgba(124,92,255,.25);
-      position:relative; flex-shrink:0;
-    }
-    .logo:after{
-      content:"";
-      position:absolute; inset:9px;
-      border-radius:10px;
-      background: rgba(255,255,255,.22);
-      transform: rotate(15deg);
-    }
-    .nav-links{
-      display:flex; gap:14px; align-items:center;
-      color:var(--muted); font-weight:600;
-    }
-    .nav-links a{
-      padding:8px 10px; border-radius:12px; border:1px solid transparent;
-    }
-    .nav-links a:hover{color:var(--text); border-color: var(--line); background: rgba(255,255,255,.04);}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 16px; border-radius:14px;
-      border:1px solid var(--line); background: rgba(255,255,255,.04);
-      color:var(--text); font-weight:700; gap:8px; cursor:pointer;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease;
-      white-space:nowrap; font-size:14px;
-    }
-    .btn:hover{background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18);}
-    .btn:active{transform: translateY(1px);}
-    .btn.primary{
-      border-color: transparent;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 18px 40px rgba(124,92,255,.25);
-    }
-    .btn.primary:hover{filter: brightness(1.06);}
-
-    /* Hero */
-    .hero{padding:60px 0 36px;}
-    .hero-inner{
-      max-width:660px;
-    }
-    .kicker{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:7px 14px; border-radius:999px;
-      border:1px solid var(--line); background: rgba(255,255,255,.04);
-      color: var(--muted); font-weight:700; font-size:13px; margin-bottom:20px;
-    }
-    .dot{width:8px; height:8px; border-radius:99px; background: var(--ok); box-shadow: 0 0 0 4px rgba(51,209,122,.12);}
-    .dot-warn{width:8px; height:8px; border-radius:99px; background: var(--warn); box-shadow: 0 0 0 4px rgba(255,204,102,.12);}
-    h1{
-      margin:0 0 16px;
-      font-size: clamp(30px, 4.5vw, 52px);
-      line-height:1.12; letter-spacing:-.5px;
-    }
-    .lead{margin:0 0 28px; color: var(--muted); font-size:17px; max-width:54ch; line-height:1.7;}
-    .cta{display:flex; gap:12px; flex-wrap:wrap;}
-
-    /* Stats row */
-    .stats{
-      display:flex; gap:12px; flex-wrap:wrap;
-      margin-top:48px; padding-top:32px;
-      border-top:1px solid var(--line);
-    }
-    .stat{
-      flex:1; min-width:140px;
-      padding:16px 18px; border-radius:var(--radius2);
-      border:1px solid var(--line); background: rgba(255,255,255,.03);
-    }
-    .stat-val{font-size:22px; font-weight:900; margin-bottom:4px;}
-    .stat-label{font-size:13px; color:var(--muted);}
-
-    /* Apps section */
-    section{padding:24px 0;}
-    .section-title{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
-      margin:16px 0 20px;
-    }
-    h2{margin:0; font-size:20px; letter-spacing:-.2px;}
-    .hint{margin:0; color:var(--muted); font-size:13px;}
-
-    .apps-grid{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:16px;
-    }
-    .app-card{
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border-radius:var(--radius2);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      display:flex; flex-direction:column;
-    }
-    .app-card-body{padding:24px;}
-    .app-header{display:flex; align-items:flex-start; gap:14px; margin-bottom:14px;}
-    .app-icon{
-      width:56px; height:56px; border-radius:16px; flex-shrink:0;
-      display:flex; align-items:center; justify-content:center;
-      font-size:26px;
-      border:1px solid var(--line);
-    }
-    .app-icon.stylemate{background: linear-gradient(135deg, rgba(124,92,255,.3), rgba(45,212,255,.2));}
-    .app-icon.baby{background: linear-gradient(135deg, rgba(255,152,0,.3), rgba(255,204,102,.2));}
-    .app-meta{flex:1;}
-    .app-name{font-size:18px; font-weight:800; margin:0 0 6px; letter-spacing:-.2px;}
-    .status-badge{
-      display:inline-flex; align-items:center; gap:6px;
-      padding:4px 10px; border-radius:999px;
-      font-size:12px; font-weight:700;
-    }
-    .status-live{background: rgba(51,209,122,.12); color: var(--ok); border:1px solid rgba(51,209,122,.25);}
-    .status-soon{background: rgba(255,204,102,.1); color: var(--warn); border:1px solid rgba(255,204,102,.22);}
-    .app-desc{color:var(--muted); font-size:14px; line-height:1.7; margin:0 0 16px;}
-    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;}
-    .tag{
-      display:inline-flex; padding:5px 10px; border-radius:999px;
-      border:1px solid var(--line); background: rgba(255,255,255,.03);
-      color: var(--muted); font-size:11px; font-weight:800; letter-spacing:.3px;
-    }
-    .app-features{
-      margin:0; padding:0; list-style:none;
-      display:flex; flex-direction:column; gap:6px;
-    }
-    .app-features li{
-      font-size:13px; color:var(--muted); padding-left:14px; position:relative;
-    }
-    .app-features li::before{content:"·"; position:absolute; left:0; color:var(--brand2);}
-    .app-card-footer{
-      padding:16px 24px;
-      border-top:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:auto;
-    }
-
-    /* Contact */
-    .contact-card{
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border-radius:var(--radius2); padding:28px;
-    }
-    .contact-card p{color:var(--muted); font-size:14px; margin:0 0 18px;}
-
-    /* Footer */
-    footer{
-      padding:26px 0 46px; border-top:1px solid var(--line);
-      margin-top:16px; color:var(--muted); font-size:13px;
-    }
-    .footer-row{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center;}
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      padding:4px 7px; border-radius:8px; border:1px solid var(--line);
-      background: rgba(255,255,255,.03); color: var(--text); font-size:12px;
-    }
-
-    @media (max-width:760px){
-      .apps-grid{grid-template-columns:1fr;}
-      .nav-links{display:none;}
-      .stats{gap:8px;}
-      .stat{min-width:120px;}
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blue Wind — 작고 쓸모 있는 앱을 만듭니다</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background-color:#f3ede0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    color:#231d15;
+    font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:#26417d;text-decoration:none;}
+  a:hover{color:#182a52;}
+  .wrap{max-width:1000px;margin:0 auto;}
+  @media (max-width:720px){
+    .pad{padding-left:24px !important;padding-right:24px !important;}
+    .hero-h1{font-size:40px !important;}
+    .app-row{grid-template-columns:1fr !important;gap:20px !important;}
+    .app-side{border-left:none !important;border-top:1px solid #cfc5b0;padding-left:0 !important;padding-top:20px !important;}
+    .masthead-nav{gap:16px !important;}
+  }
+</style>
 </head>
-
 <body>
-  <div class="nav">
-    <div class="wrap">
-      <div class="nav-inner">
-        <a class="brand" href="#top">
-          <span class="logo" aria-hidden="true"></span>
-          <span>Blue Wind</span>
-        </a>
-        <div class="nav-links">
-          <a href="#apps">앱 소개</a>
-          <a href="#contact">문의</a>
+<div class="wrap">
+
+  <!-- masthead -->
+  <div class="pad" style="display:flex;align-items:center;justify-content:space-between;padding:22px 56px;border-bottom:1px solid #231d15;">
+    <div style="font-family:'Noto Serif KR',serif;font-weight:700;font-size:19px;letter-spacing:.24em;text-transform:uppercase;">Blue&nbsp;Wind</div>
+    <div class="masthead-nav" style="display:flex;gap:28px;font-size:13.5px;letter-spacing:.02em;color:#6a604e;">
+      <a href="#apps" style="color:#6a604e;border-bottom:1px solid #c9bfa9;padding-bottom:2px;">앱 소개</a>
+      <a href="#contact" style="color:#6a604e;border-bottom:1px solid #c9bfa9;padding-bottom:2px;">문의</a>
+    </div>
+  </div>
+
+  <!-- hero -->
+  <div class="pad" style="padding:64px 56px 40px;">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:26px;">
+      <span style="font-family:'Noto Serif KR',serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#26417d;">Est. 개인 개발</span>
+      <span style="flex:1;height:1px;background:#cfc5b0;"></span>
+      <span style="font-size:12px;letter-spacing:.06em;color:#8a7f6b;">1인 개발자 · 앱 2개 운영 중</span>
+    </div>
+    <h1 class="hero-h1" style="font-family:'Noto Serif KR',serif;font-weight:700;font-size:64px;line-height:1.18;letter-spacing:-.01em;margin:0 0 22px;max-width:16ch;">작고 쓸모 있는<br/>앱을 만듭니다.</h1>
+    <p style="font-size:18px;line-height:1.85;color:#4c4436;max-width:46ch;margin:0 0 32px;">일상의 불편함을 해결하는 모바일 앱을 개발합니다. iOS와 Android에서, 패션부터 육아까지 — 매일 쓰게 되는 작은 도구를 지향합니다.</p>
+    <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap;">
+      <a href="#apps" style="display:inline-flex;align-items:center;gap:8px;background:#26417d;color:#f3ede0;font-weight:500;font-size:15px;padding:13px 24px;">앱 보러가기 →</a>
+      <a href="#contact" style="font-size:15px;color:#231d15;border-bottom:1px solid #231d15;padding-bottom:3px;">협업 문의</a>
+    </div>
+  </div>
+
+  <!-- apps -->
+  <div id="apps" class="pad" style="padding:20px 56px 8px;">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;border-top:2px solid #231d15;padding-top:16px;margin-bottom:8px;">
+      <h2 style="font-family:'Noto Serif KR',serif;font-weight:600;font-size:15px;letter-spacing:.22em;text-transform:uppercase;margin:0;">앱 소개</h2>
+      <span style="font-size:13px;color:#8a7f6b;">현재 운영 중인 앱들</span>
+    </div>
+
+    <!-- entry 01 -->
+    <div class="app-row" style="display:grid;grid-template-columns:80px 1fr 200px;gap:32px;padding:34px 0;border-top:1px solid #cfc5b0;">
+      <div>
+        <div style="font-family:'Noto Serif KR',serif;font-size:15px;color:#26417d;letter-spacing:.1em;margin-bottom:14px;">01</div>
+        <div style="width:56px;height:56px;border:1.5px solid #231d15;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif KR',serif;font-weight:700;font-size:26px;">S</div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:10px;flex-wrap:wrap;">
+          <h3 style="font-family:'Noto Serif KR',serif;font-weight:700;font-size:26px;margin:0;">AI.StyleMate</h3>
+          <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.08em;color:#26417d;"><span style="width:7px;height:7px;background:#26417d;display:inline-block;"></span>운영 중</span>
         </div>
-        <a class="btn" href="#contact">문의하기</a>
+        <p style="font-size:15.5px;line-height:1.8;color:#4c4436;margin:0 0 16px;max-width:52ch;">내 옷장과 오늘 날씨를 바탕으로 코디를 추천하는 패션 앱. 가진 옷을 등록하면 기온·강수·체감을 반영해 현실적인 조합을 제안합니다.</p>
+        <div style="font-size:11.5px;letter-spacing:.14em;color:#8a7f6b;text-transform:uppercase;">Weather &nbsp;·&nbsp; Wardrobe &nbsp;·&nbsp; AI &nbsp;·&nbsp; Image</div>
+      </div>
+      <div class="app-side" style="border-left:1px solid #cfc5b0;padding-left:24px;">
+        <ul style="list-style:none;margin:0 0 20px;padding:0;font-size:13.5px;line-height:1.55;color:#4c4436;">
+          <li style="padding:5px 0;border-bottom:1px solid #e0d7c5;">날씨 기반 코디 추천</li>
+          <li style="padding:5px 0;border-bottom:1px solid #e0d7c5;">옷장 관리 — 소재·색상</li>
+          <li style="padding:5px 0;border-bottom:1px solid #e0d7c5;">AI 개인화 &amp; 시각화</li>
+          <li style="padding:5px 0;">추천 히스토리 저장</li>
+        </ul>
+        <a href="mailto:stylemate.helpdesk@gmail.com" style="font-size:14px;border-bottom:1px solid #26417d;padding-bottom:2px;">문의하기 →</a>
+      </div>
+    </div>
+
+    <!-- entry 02 -->
+    <div class="app-row" style="display:grid;grid-template-columns:80px 1fr 200px;gap:32px;padding:34px 0;border-top:1px solid #cfc5b0;border-bottom:1px solid #cfc5b0;">
+      <div>
+        <div style="font-family:'Noto Serif KR',serif;font-size:15px;color:#26417d;letter-spacing:.1em;margin-bottom:14px;">02</div>
+        <div style="width:56px;height:56px;border:1.5px solid #231d15;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif KR',serif;font-weight:700;font-size:17px;">36.5</div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:10px;flex-wrap:wrap;">
+          <h3 style="font-family:'Noto Serif KR',serif;font-weight:700;font-size:26px;margin:0;">36.5도</h3>
+          <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.08em;color:#26417d;"><span style="width:7px;height:7px;background:#26417d;display:inline-block;"></span>운영 중</span>
+        </div>
+        <p style="font-size:15.5px;line-height:1.8;color:#4c4436;margin:0 0 16px;max-width:52ch;">아이의 체온과 투약 기록을 간편하게 관리하는 육아 건강 앱. 음성 입력과 도움말로 열이 날 때도 빠르고 정확하게 기록합니다.</p>
+        <div style="font-size:11.5px;letter-spacing:.14em;color:#8a7f6b;text-transform:uppercase;">Temp &nbsp;·&nbsp; Med &nbsp;·&nbsp; Voice &nbsp;·&nbsp; History</div>
+      </div>
+      <div class="app-side" style="border-left:1px solid #cfc5b0;padding-left:24px;">
+        <ul style="list-style:none;margin:0 0 20px;padding:0;font-size:13.5px;line-height:1.55;color:#4c4436;">
+          <li style="padding:5px 0;border-bottom:1px solid #e0d7c5;">체온 기록 &amp; 타임라인</li>
+          <li style="padding:5px 0;border-bottom:1px solid #e0d7c5;">투약 기록 &amp; 간격 알림</li>
+          <li style="padding:5px 0;border-bottom:1px solid #e0d7c5;">음성 입력(STT) 지원</li>
+          <li style="padding:5px 0;">상황별 안내</li>
+        </ul>
+        <a href="mailto:etgosu@gmail.com" style="font-size:14px;border-bottom:1px solid #26417d;padding-bottom:2px;">문의하기 →</a>
       </div>
     </div>
   </div>
 
-  <main id="top">
-    <div class="wrap">
+  <!-- contact -->
+  <div id="contact" class="pad" style="padding:52px 56px;text-align:center;">
+    <h2 style="font-family:'Noto Serif KR',serif;font-weight:700;font-size:34px;margin:0 0 14px;">함께 만들 이야기가 있다면</h2>
+    <p style="font-size:16px;line-height:1.8;color:#4c4436;max-width:44ch;margin:0 auto 26px;">앱 출시 소식, 베타 테스트 참여, 비즈니스 협업 — 무엇이든 편하게 연락 주세요.</p>
+    <a href="mailto:etgosu@gmail.com" style="display:inline-block;background:#26417d;color:#f3ede0;font-size:15px;padding:14px 30px;">이메일로 문의하기</a>
+  </div>
 
-      <!-- Hero -->
-      <div class="hero">
-        <div class="hero-inner">
-          <div class="kicker"><span class="dot"></span> 1인 개발자 · 앱 2개 운영 중</div>
-          <h1>작고 쓸모 있는<br/>앱을 만듭니다.</h1>
-          <p class="lead">
-            일상의 불편함을 해결하는 모바일 앱을 개발합니다.<br/>
-            iOS · Android, 패션부터 육아까지.
-          </p>
-          <div class="cta">
-            <a class="btn primary" href="#apps">앱 보러가기</a>
-            <a class="btn" href="#contact">협업 문의</a>
-          </div>
-        </div>
+  <!-- footer -->
+  <div class="pad" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:22px 56px 40px;border-top:1px solid #231d15;font-size:12.5px;color:#8a7f6b;letter-spacing:.02em;">
+    <span>© 2026 Blue Wind (etgosu). All rights reserved.</span>
+    <span>iOS · Android &nbsp;—&nbsp; 앱 2개 운영</span>
+  </div>
 
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-val">2</div>
-            <div class="stat-label">운영 중인 앱</div>
-          </div>
-          <div class="stat">
-            <div class="stat-val">iOS · Android</div>
-            <div class="stat-label">지원 플랫폼</div>
-          </div>
-          <div class="stat">
-            <div class="stat-val">AI 기반</div>
-            <div class="stat-label">핵심 기술</div>
-          </div>
-          <div class="stat">
-            <div class="stat-val">최소 수집</div>
-            <div class="stat-label">개인정보 원칙</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Apps -->
-      <section id="apps">
-        <div class="section-title">
-          <h2>앱 소개</h2>
-          <p class="hint">현재 운영 중인 앱들입니다.</p>
-        </div>
-
-        <div class="apps-grid">
-
-          <!-- AI.StyleMate -->
-          <div class="app-card">
-            <div class="app-card-body">
-              <div class="app-header">
-                <div class="app-icon stylemate">👔</div>
-                <div class="app-meta">
-                  <p class="app-name">AI.StyleMate</p>
-                  <span class="status-badge status-live"><span class="dot"></span> 프로덕션</span>
-                </div>
-              </div>
-              <p class="app-desc">
-                내 옷장과 오늘 날씨를 바탕으로 AI가 코디를 추천해 주는 패션 앱.
-                갖고 있는 옷을 등록하면 기온·강수·체감 요소를 반영해 현실적인 조합을 제안합니다.
-              </p>
-              <div class="tags">
-                <span class="tag">WEATHER</span>
-                <span class="tag">WARDROBE</span>
-                <span class="tag">AI</span>
-                <span class="tag">IMAGE</span>
-              </div>
-              <ul class="app-features">
-                <li>날씨 기반 코디 추천 (기온·강수·체감)</li>
-                <li>옷장 관리 — 소재·두께·색상 등록</li>
-                <li>AI 개인화 조합 & 이미지 시각화</li>
-                <li>추천 히스토리 저장</li>
-              </ul>
-            </div>
-            <div class="app-card-footer">
-              <a class="btn primary" href="mailto:stylemate.helpdesk@gmail.com">문의하기</a>
-            </div>
-          </div>
-
-          <!-- 36.5도 -->
-          <div class="app-card">
-            <div class="app-card-body">
-              <div class="app-header">
-                <div class="app-icon baby">🌡️</div>
-                <div class="app-meta">
-                  <p class="app-name">36.5도</p>
-                  <span class="status-badge status-live"><span class="dot"></span> 프로덕션 · iOS</span>
-                </div>
-              </div>
-              <p class="app-desc">
-                아이의 체온과 투약 기록을 간편하게 관리하는 육아 건강 앱.
-                음성 입력과 AI 도움말로 열이 날 때도 빠르고 정확하게 기록할 수 있습니다.
-              </p>
-              <div class="tags">
-                <span class="tag">TEMP</span>
-                <span class="tag">MED</span>
-                <span class="tag">AI</span>
-                <span class="tag">HISTORY</span>
-                <span class="tag">VOICE</span>
-              </div>
-              <ul class="app-features">
-                <li>체온 기록 & 타임라인 조회</li>
-                <li>해열제 투약 기록 및 간격 알림</li>
-                <li>음성 입력 (STT) 지원</li>
-                <li>AI 기반 상황 안내</li>
-              </ul>
-            </div>
-            <div class="app-card-footer">
-              <a class="btn primary" href="mailto:etgosu@gmail.com">문의하기</a>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section id="contact">
-        <div class="section-title">
-          <h2>문의</h2>
-        </div>
-        <div class="contact-card">
-          <p>앱 출시 소식, 베타 테스트 참여, 비즈니스 협업 등 무엇이든 편하게 연락해 주세요.</p>
-          <div class="cta">
-            <a class="btn primary" href="mailto:etgosu@gmail.com">이메일로 문의하기</a>
-            <a class="btn" href="#top">위로</a>
-          </div>
-        </div>
-      </section>
-
-      <footer>
-        <div class="footer-row">
-          <div>© <span id="year"></span> Blue Wind (etgosu). All rights reserved.</div>
-          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-            <span class="kbd">iOS · Android</span>
-            <span style="opacity:.6;">·</span>
-            <span class="kbd">앱 2개</span>
-          </div>
-        </div>
-      </footer>
-
-    </div>
-  </main>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+</div>
 </body>
 </html>
